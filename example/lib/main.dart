@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:grand_copperframe/grand_copperframe.dart';
+import 'package:message_slot_bubblegum/message_slot_bubblegum.dart';
+import 'package:slotboard_copperframe/slotboard_copperframe.dart';
 
 void main() {
   runApp(const MyApp());
+}
+
+class InfoSlot extends CopperframeSlotBase {
+  InfoSlot({required super.tags});
 }
 
 class MyApp extends StatelessWidget {
@@ -56,6 +63,9 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  final _infoSlot = InfoSlot(tags: ['main']);
+  final messages = [CopperframeMessage(label: 'Some label', level: CopperframeMessageLevel.info, category: 'privacy')];
+
 
   void _incrementCounter() {
     setState(() {
@@ -112,6 +122,7 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
+            BubblegumMessageSlot(slot: _infoSlot, messages: messages ),
           ],
         ),
       ),
