@@ -98,6 +98,28 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   final String _description = 'Start';
   final _infoSlot = InfoSlot(tags: ['main']);
+  final slotMessages = CircularParameterList<List<CopperframeMessage>>(
+      label: 'single info',
+      value: [MessageRepo.longInfo]).addParameter('error and info', [
+    MessageRepo.error,
+    MessageRepo.info
+  ]).addParameter('error warning info', [
+    MessageRepo.error,
+    MessageRepo.warning,
+    MessageRepo.info
+  ]).addParameter('error and info', [
+    MessageRepo.otherError,
+    MessageRepo.error,
+    MessageRepo.warning,
+    MessageRepo.info
+  ]).addParameter('6 messages', [
+    MessageRepo.info,
+    MessageRepo.warning,
+    MessageRepo.info,
+    MessageRepo.warning,
+    MessageRepo.info,
+    MessageRepo.warning,
+  ]);
   final prominence = CircularParameterList<String>(label: 'low', value: 'low')
       .addParameter('medium', 'medium')
       .addParameter('high', 'high');
@@ -105,9 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
       .addParameter('medium', 'medium')
       .addParameter('large', 'large');
 
-  final slotMessages = CircularParameterList<List<CopperframeMessage>>(
-          label: 'single info', value: [MessageRepo.longInfo])
-      .addParameter('error and info', [MessageRepo.error, MessageRepo.info]);
+
 
   void _incrementCounter() {
     setState(() {
@@ -123,9 +143,14 @@ class _MyHomePageState extends State<MyHomePage> {
           prominence: prominence.current().value,
           title: 'Some title',
           description: 'Some description');
-      size.next();
       prominence.next();
-      slotMessages.next();
+      if (prominence.currentIndex() == 0){
+        size.next();
+        if (size.currentIndex() == 0) {
+          slotMessages.next();
+        }
+      }
+
     });
   }
 
