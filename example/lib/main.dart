@@ -3,6 +3,8 @@ import 'package:grand_copperframe/grand_copperframe.dart';
 import 'package:message_slot_bubblegum/message_slot_bubblegum.dart';
 import 'package:slotboard_copperframe/slotboard_copperframe.dart';
 
+import 'circular_parameter_list.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -65,8 +67,12 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   final String _description = 'Start';
   final _infoSlot = InfoSlot(tags: ['main']);
-  final messages = [CopperframeMessage(label: 'Some label', level: CopperframeMessageLevel.info, category: 'privacy')];
-
+  final messages = [
+    CopperframeMessage(
+        label: 'Some label',
+        level: CopperframeMessageLevel.info,
+        category: 'privacy')
+  ];
 
   void _incrementCounter() {
     setState(() {
@@ -76,7 +82,21 @@ class _MyHomePageState extends State<MyHomePage> {
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
       _counter++;
-      _infoSlot.setValues(size: 'small', prominence: 'medium', title: 'Some title', description: 'Some description');
+      final prominence =
+          CircularParameterList<String>(label: 'low', value: 'low');
+      prominence.addParameter('medium', 'medium');
+      prominence.addParameter('high', 'high');
+      final size =
+          CircularParameterList<String>(label: 'small', value: 'small');
+      size.addParameter('medium', 'medium');
+      size.addParameter('large', 'large');
+
+      _infoSlot.setValues(
+          size: size.current().value,
+          prominence: prominence.current().value,
+          title: 'Some title',
+          description: 'Some description');
+      size.next();
     });
   }
 
@@ -124,7 +144,7 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            BubblegumMessageSlot(slot: _infoSlot, messages: messages ),
+            BubblegumMessageSlot(slot: _infoSlot, messages: messages),
           ],
         ),
       ),
