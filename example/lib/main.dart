@@ -96,7 +96,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-  final String _description = 'Start';
+  String _description = 'Start';
   final _infoSlot = InfoSlot(tags: ['main']);
   final slotMessages = CircularParameterList<List<CopperframeMessage>>(
       label: 'single info',
@@ -127,8 +127,6 @@ class _MyHomePageState extends State<MyHomePage> {
       .addParameter('medium', 'medium')
       .addParameter('large', 'large');
 
-
-
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -138,20 +136,21 @@ class _MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       _counter++;
 
-      _infoSlot.setValues(
-          size: size.current().value,
-          prominence: prominence.current().value,
-          title: 'Some title',
-          description: 'Some description');
       prominence.next();
-      if (prominence.currentIndex() == 0){
+      if (prominence.currentIndex() == 0) {
         size.next();
         if (size.currentIndex() == 0) {
           slotMessages.next();
         }
       }
-
+      _infoSlot.setValues(
+          size: size.current().value,
+          prominence: prominence.current().value,
+          title: 'Some title',
+          description: 'Some description');
     });
+    _description =
+        'Size: ${size.current().label}\nProminence: ${prominence.current().label}\nMessages: ${slotMessages.current().label}';
   }
 
   @override
