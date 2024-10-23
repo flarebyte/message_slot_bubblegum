@@ -63,6 +63,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  final String _description = 'Start';
   final _infoSlot = InfoSlot(tags: ['main']);
   final messages = [CopperframeMessage(label: 'Some label', level: CopperframeMessageLevel.info, category: 'privacy')];
 
@@ -116,8 +117,8 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+            Text(
+              _description,
             ),
             Text(
               '$_counter',
