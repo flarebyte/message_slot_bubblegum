@@ -54,7 +54,8 @@ class CircularParameterList<T> {
   }
 
   /// Adds a new [CircularParameter] to the list.
-  void addParameter(String label, T value) {
+   addParameter(String label, T value) {
     parameters.add(CircularParameter(label: label, value: value));
+    return this;
   }
 }

@@ -13,6 +13,37 @@ class InfoSlot extends CopperframeSlotBase {
   InfoSlot({required super.tags});
 }
 
+class MessageRepo {
+  static final info = CopperframeMessage(
+      label: 'Some info',
+      level: CopperframeMessageLevel.info,
+      category: 'privacy');
+  static final longInfo = CopperframeMessage(
+      label:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tincidunt massa sem, et pulvinar dolor sollicitudin vitae. Suspendisse porta nunc leo, eu sagittis tellus facilisis vitae. Integer placerat hendrerit ipsum, ac ornare justo blandit vel. Vivamus finibus tortor diam, in volutpat nibh semper vel. Proin mi ex, blandit rhoncus sodales',
+      level: CopperframeMessageLevel.info,
+      category: 'privacy');
+  static final veryLongInfo = CopperframeMessage(
+      label:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin non lorem sit amet tellus semper vestibulum. Cras sit amet purus aliquam lacus finibus fringilla. Donec nulla odio, gravida quis eros ac, consectetur feugiat est. Sed et mauris vel metus lacinia ullamcorper. Cras bibendum nisl semper sem vehicula dictum. Nam et felis risus. Suspendisse iaculis lacus nec finibus fermentum. Ut tempor faucibus augue at facilisis. Duis id facilisis augue. Etiam tellus purus, scelerisque vitae posuere ac, pretium ac nisl. Quisque a congue mi, in hendrerit ipsum. Duis sed fermentum metus. Phasellus tempor eu ligula ut laoreet. Fusce varius in massa sit.',
+      level: CopperframeMessageLevel.info,
+      category: 'privacy');
+  static final warning = CopperframeMessage(
+      label: 'Some warning',
+      level: CopperframeMessageLevel.warning,
+      category: 'validation');
+  static final otherWarning = CopperframeMessage(
+      label: 'Other warning',
+      level: CopperframeMessageLevel.warning,
+      category: 'validation');
+  static final error = CopperframeMessage(
+      label: 'Some error',
+      level: CopperframeMessageLevel.error,
+      category: 'server');
+  static final otherError = CopperframeMessage(
+      label: 'Other error', level: CopperframeMessageLevel.error, category: '');
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -67,12 +98,15 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   final String _description = 'Start';
   final _infoSlot = InfoSlot(tags: ['main']);
-  final messages = [
-    CopperframeMessage(
-        label: 'Some label',
-        level: CopperframeMessageLevel.info,
-        category: 'privacy')
-  ];
+  final prominence = CircularParameterList<String>(label: 'low', value: 'low')
+      .addParameter('medium', 'medium')
+      .addParameter('high', 'high');
+  final size = CircularParameterList<String>(label: 'small', value: 'small')
+      .addParameter('medium', 'medium')
+      .addParameter('large', 'large');
+
+  final messages = CircularParameterList<List<CopperframeMessage>>(
+      label: 'single info', value: [MessageRepo.longInfo]);
 
   void _incrementCounter() {
     setState(() {
@@ -82,14 +116,6 @@ class _MyHomePageState extends State<MyHomePage> {
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
       _counter++;
-      final prominence =
-          CircularParameterList<String>(label: 'low', value: 'low');
-      prominence.addParameter('medium', 'medium');
-      prominence.addParameter('high', 'high');
-      final size =
-          CircularParameterList<String>(label: 'small', value: 'small');
-      size.addParameter('medium', 'medium');
-      size.addParameter('large', 'large');
 
       _infoSlot.setValues(
           size: size.current().value,
@@ -97,6 +123,7 @@ class _MyHomePageState extends State<MyHomePage> {
           title: 'Some title',
           description: 'Some description');
       size.next();
+      prominence.next();
     });
   }
 
@@ -144,7 +171,7 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            BubblegumMessageSlot(slot: _infoSlot, messages: messages),
+            BubblegumMessageSlot(slot: _infoSlot, messages: messages.current().value),
           ],
         ),
       ),
