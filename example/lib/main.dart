@@ -105,8 +105,9 @@ class _MyHomePageState extends State<MyHomePage> {
       .addParameter('medium', 'medium')
       .addParameter('large', 'large');
 
-  final messages = CircularParameterList<List<CopperframeMessage>>(
-      label: 'single info', value: [MessageRepo.longInfo]);
+  final slotMessages = CircularParameterList<List<CopperframeMessage>>(
+          label: 'single info', value: [MessageRepo.longInfo])
+      .addParameter('error and info', [MessageRepo.error, MessageRepo.info]);
 
   void _incrementCounter() {
     setState(() {
@@ -124,6 +125,7 @@ class _MyHomePageState extends State<MyHomePage> {
           description: 'Some description');
       size.next();
       prominence.next();
+      slotMessages.next();
     });
   }
 
@@ -171,7 +173,8 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            BubblegumMessageSlot(slot: _infoSlot, messages: messages.current().value),
+            BubblegumMessageSlot(
+                slot: _infoSlot, messages: slotMessages.current().value),
           ],
         ),
       ),
