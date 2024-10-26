@@ -113,7 +113,7 @@ class MultiCircularIterator extends CircularIteratorBase {
   }
   @override
   void reset() {
-    _index == 0;
+    _index = 0;
     for (var iterator in iterators) {
       iterator.reset();
     }
