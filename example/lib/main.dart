@@ -4,6 +4,7 @@ import 'package:message_slot_bubblegum/message_slot_bubblegum.dart';
 import 'package:slotboard_copperframe/slotboard_copperframe.dart';
 
 import 'circular_parameter_list.dart';
+import 'circular_parameter_widget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -110,7 +111,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String _description = 'Start';
   final _infoSlot = InfoSlot(tags: ['main']);
   final loopData = IterationData();
   void _incrementCounter() {
@@ -122,8 +122,6 @@ class _MyHomePageState extends State<MyHomePage> {
           title: 'Some title',
           description: 'Some description');
     });
-    _description =
-        'Size: ${loopData.size.current().label}\nProminence: ${loopData.prominence.current().label}\nMessages: ${loopData.slotMessages.current().label}';
   }
 
   @override
@@ -137,9 +135,9 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              _description,
-            ),
+            CircularParameterWidget(title: 'Size', parameterList:  loopData.size),
+            CircularParameterWidget(title: 'Prominence', parameterList:  loopData.prominence),
+            CircularParameterWidget(title: 'Messages', parameterList:  loopData.slotMessages),
             Text(
               '${loopData.mainCircularIterator.currentIndex()+1}/${loopData.mainCircularIterator.length()}',
               style: Theme.of(context).textTheme.headlineMedium,
