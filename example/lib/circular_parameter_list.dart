@@ -96,13 +96,24 @@ class MultiCircularIterator extends CircularIteratorBase {
 
   @override
   void next() {
-    for (var iterator in iterators) {
-      iterator.next();
+    _index++;
+    _resetIfOutsideLengthRange();
+    bool wasFirst = true;
+    for (final (index, iterator) in iterators.indexed) {
+      if (index == 0 || wasFirst) {
+        iterator.next();
+      }
+      wasFirst = iterator.isFirst();
     }
   }
-
+  _resetIfOutsideLengthRange(){
+    if (_index>=length()){
+      reset();
+    }
+  }
   @override
   void reset() {
+    _index == 0;
     for (var iterator in iterators) {
       iterator.reset();
     }

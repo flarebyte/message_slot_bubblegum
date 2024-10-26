@@ -13,6 +13,45 @@ class InfoSlot extends CopperframeSlotBase {
   InfoSlot({required super.tags});
 }
 
+class IterationData {
+  late CircularParameterList slotMessages;
+  late CircularParameterList prominence;
+  late CircularParameterList size;
+  late MultiCircularIterator mainCircularIterator;
+  IterationData(){
+    slotMessages = CircularParameterList<List<CopperframeMessage>>(
+        label: 'single info',
+        value: [MessageRepo.longInfo]).addParameter('error and info', [
+      MessageRepo.error,
+      MessageRepo.info
+    ]).addParameter('error warning info', [
+      MessageRepo.error,
+      MessageRepo.warning,
+      MessageRepo.info
+    ]).addParameter('error and info', [
+      MessageRepo.otherError,
+      MessageRepo.error,
+      MessageRepo.warning,
+      MessageRepo.info
+    ]).addParameter('6 messages', [
+      MessageRepo.info,
+      MessageRepo.warning,
+      MessageRepo.info,
+      MessageRepo.warning,
+      MessageRepo.info,
+      MessageRepo.warning,
+    ]);
+    prominence = CircularParameterList<String>(label: 'low', value: 'low')
+        .addParameter('medium', 'medium')
+        .addParameter('high', 'high');
+    size = CircularParameterList<String>(label: 'small', value: 'small')
+        .addParameter('medium', 'medium')
+        .addParameter('large', 'large');
+    mainCircularIterator = MultiCircularIterator([prominence, size, slotMessages]);
+
+  }
+}
+
 class MessageRepo {
   static final info = CopperframeMessage(
       label: 'Some info',
@@ -95,38 +134,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
   String _description = 'Start';
   final _infoSlot = InfoSlot(tags: ['main']);
-  final slotMessages = CircularParameterList<List<CopperframeMessage>>(
-      label: 'single info',
-      value: [MessageRepo.longInfo]).addParameter('error and info', [
-    MessageRepo.error,
-    MessageRepo.info
-  ]).addParameter('error warning info', [
-    MessageRepo.error,
-    MessageRepo.warning,
-    MessageRepo.info
-  ]).addParameter('error and info', [
-    MessageRepo.otherError,
-    MessageRepo.error,
-    MessageRepo.warning,
-    MessageRepo.info
-  ]).addParameter('6 messages', [
-    MessageRepo.info,
-    MessageRepo.warning,
-    MessageRepo.info,
-    MessageRepo.warning,
-    MessageRepo.info,
-    MessageRepo.warning,
-  ]);
-  final prominence = CircularParameterList<String>(label: 'low', value: 'low')
-      .addParameter('medium', 'medium')
-      .addParameter('high', 'high');
-  final size = CircularParameterList<String>(label: 'small', value: 'small')
-      .addParameter('medium', 'medium')
-      .addParameter('large', 'large');
-
+  final loopData = IterationData();
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -134,23 +144,15 @@ class _MyHomePageState extends State<MyHomePage> {
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
-      _counter++;
-
-      prominence.next();
-      if (prominence.currentIndex() == 0) {
-        size.next();
-        if (size.currentIndex() == 0) {
-          slotMessages.next();
-        }
-      }
+      loopData.mainCircularIterator.next();
       _infoSlot.setValues(
-          size: size.current().value,
-          prominence: prominence.current().value,
+          size: loopData.size.current().value,
+          prominence: loopData.prominence.current().value,
           title: 'Some title',
           description: 'Some description');
     });
     _description =
-        'Size: ${size.current().label}\nProminence: ${prominence.current().label}\nMessages: ${slotMessages.current().label}';
+        'Size: ${loopData.size.current().label}\nProminence: ${loopData.prominence.current().label}\nMessages: ${loopData.slotMessages.current().label}';
   }
 
   @override
@@ -194,11 +196,11 @@ class _MyHomePageState extends State<MyHomePage> {
               _description,
             ),
             Text(
-              '$_counter',
+              '${loopData.mainCircularIterator.currentIndex()}/${loopData.mainCircularIterator.length()}',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             BubblegumMessageSlot(
-                slot: _infoSlot, messages: slotMessages.current().value),
+                slot: _infoSlot, messages: loopData.slotMessages.current().value),
           ],
         ),
       ),
