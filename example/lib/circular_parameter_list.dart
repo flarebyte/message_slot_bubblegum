@@ -1,3 +1,4 @@
+/// Represents a single parameter with a label and value of generic type [T].
 class CircularParameter<T> {
   /// Represents a parameter with a label and a value of generic type [T].
   final String label;
@@ -6,6 +7,8 @@ class CircularParameter<T> {
   CircularParameter({required this.label, required this.value});
 }
 
+/// Abstract base class that defines the interface for circular iteration.
+/// It provides methods to navigate through a list in a circular manner.
 abstract class CircularIteratorBase {
   /// Moves to the next element in the list, cycling back to the start if at the end.
   void next();
@@ -23,6 +26,8 @@ abstract class CircularIteratorBase {
   bool isFirst();
 }
 
+/// Manages a list of [CircularParameter] objects and allows circular iteration through them.
+/// Provides methods to add parameters, move to the next parameter, and access the current parameter.
 class CircularParameterList<T> extends CircularIteratorBase {
   final List<CircularParameter<T>> parameters = [];
   int _index = 0;
