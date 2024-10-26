@@ -1,4 +1,5 @@
 class CircularParameter<T> {
+  /// Represents a parameter with a label and a value of generic type [T].
   final String label;
   final T value;
 
@@ -6,10 +7,19 @@ class CircularParameter<T> {
 }
 
 abstract class CircularIteratorBase {
+  /// Moves to the next element in the list, cycling back to the start if at the end.
   void next();
+
+  /// Returns the total number of elements in the list.
   int length();
+
+  /// Resets the current index to the beginning of the list.
   void reset();
+
+  /// Returns the current index of the iteration.
   int currentIndex();
+
+  /// Returns true if the current element is the first in the list.
   bool isFirst();
 }
 
@@ -17,30 +27,28 @@ class CircularParameterList<T> extends CircularIteratorBase {
   final List<CircularParameter<T>> parameters = [];
   int _index = 0;
 
+  /// Creates a new instance of [CircularParameterList] with an initial parameter.
+  /// The list is initialized with the given [label] and [value].
   CircularParameterList({required String label, required T value}) {
     addParameter(label, value);
   }
 
-  /// Moves to the next parameter. If it reaches the end, it cycles back to the first element
-  /// and triggers the [onCycleRestart] callback if provided.
+  /// Moves to the next parameter in the list.
+  /// If it reaches the end of the list, it cycles back to the first element.
   @override
   void next() {
     _index = (_index + 1) % parameters.length;
   }
 
   /// Returns the current parameter as a [CircularParameter<T>].
-  /// Returns `null` if the list is empty or the index is not set.
   CircularParameter<T> current() {
     return parameters[_index];
   }
 
   /// Resets the index to the first parameter in the list.
-  /// Does nothing if the list is empty.
   @override
   void reset() {
-    if (parameters.isNotEmpty) {
-      _index = 0;
-    }
+    _index = 0;
   }
 
   /// Returns the total number of parameters in the list.
@@ -49,25 +57,28 @@ class CircularParameterList<T> extends CircularIteratorBase {
     return parameters.length;
   }
 
-  /// Returns the current index, or `-1` if the index is null (e.g., iteration not started
-  /// or list is empty).
+  /// Returns the current index of the list.
+  /// The index starts at `0` and increments circularly as [next()] is called.
   @override
   int currentIndex() {
     return _index;
   }
 
+  /// Returns `true` if the current parameter is the first in the list.
   @override
   bool isFirst() {
     return _index == 0;
   }
 
   /// Returns a copy of the list of parameters.
+  /// This allows access to the complete list without modifying the original.
   List<CircularParameter<T>> toList() {
     return List<CircularParameter<T>>.from(parameters);
   }
 
   /// Adds a new [CircularParameter] to the list.
-  addParameter(String label, T value) {
+  /// This method returns the instance of [CircularParameterList] to allow for method chaining.
+  CircularParameterList<T> addParameter(String label, T value) {
     parameters.add(CircularParameter(label: label, value: value));
     return this;
   }
