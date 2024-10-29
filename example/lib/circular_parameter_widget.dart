@@ -24,8 +24,8 @@ class CircularParameterWidget<T> extends StatelessWidget {
             child: Text(
               parameterList.current().label,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
           ),
 
@@ -38,7 +38,8 @@ class CircularParameterWidget<T> extends StatelessWidget {
               alignment: Alignment.centerRight,
               child: CircularProgressIndicator(
                 value: parameterList.length() > 0
-                    ? (parameterList.currentIndex() + 1) / parameterList.length()
+                    ? (parameterList.currentIndex() + 1) /
+                        parameterList.length()
                     : 0.0,
                 strokeWidth: 4.0,
               ),
@@ -53,8 +54,8 @@ class CircularParameterWidget<T> extends StatelessWidget {
             child: Text(
               title,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                fontWeight: FontWeight.w500,
-              ),
+                    fontWeight: FontWeight.w500,
+                  ),
               textAlign: TextAlign.right,
             ),
           ),

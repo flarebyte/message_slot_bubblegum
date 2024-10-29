@@ -4,11 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  testWidgets('CircularParameterWidget displays title, label, and progress indicator correctly', (WidgetTester tester) async {
+  testWidgets(
+      'CircularParameterWidget displays title, label, and progress indicator correctly',
+      (WidgetTester tester) async {
     // Arrange
-    final parameterList = CircularParameterList<String>(label: 'Parameter 1', value: 'Value 1')
-      .addParameter('Parameter 2', 'Value 2')
-      .addParameter('Parameter 3', 'Value 3');
+    final parameterList =
+        CircularParameterList<String>(label: 'Parameter 1', value: 'Value 1')
+            .addParameter('Parameter 2', 'Value 2')
+            .addParameter('Parameter 3', 'Value 3');
 
     // Act
     await tester.pumpWidget(
@@ -27,5 +30,4 @@ void main() {
     expect(find.text('Test Title'), findsOneWidget);
     expect(find.byType(CircularProgressIndicator), findsOneWidget);
   });
-
 }
