@@ -8,37 +8,58 @@ class CircularParameterWidget<T> extends StatelessWidget {
   final String title;
   final CircularParameterList<T> parameterList;
 
-  CircularParameterWidget({super.key, required this.title, required this.parameterList});
+  CircularParameterWidget({required this.title, required this.parameterList});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        /// Displays the title of the widget.
-        Text(
-          title,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.bold,
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          /// Displays the label of the current parameter in the list.
+          Expanded(
+            flex: 2,
+            child: Text(
+              parameterList.current().label,
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
-        ),
-        const SizedBox(width: 8.0),
 
-        /// Displays the label of the current parameter in the list.
-        Text(
-          parameterList.current().label,
-          style: Theme.of(context).textTheme.bodyMedium,
-        ),
-        const SizedBox(width: 16.0),
+          const SizedBox(width: 16.0),
 
-        /// Displays a circular progress indicator representing the index position.
-        CircularProgressIndicator(
-          value: parameterList.length() > 0
-              ? (parameterList.currentIndex() + 1) / parameterList.length()
-              : 0.0,
-          strokeWidth: 4.0,
-        ),
-      ],
+          /// Displays a circular progress indicator representing the index position.
+          Expanded(
+            flex: 1,
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: CircularProgressIndicator(
+                value: parameterList.length() > 0
+                    ? (parameterList.currentIndex() + 1) / parameterList.length()
+                    : 0.0,
+                strokeWidth: 4.0,
+              ),
+            ),
+          ),
+
+          const SizedBox(width: 16.0),
+
+          /// Displays the title of the widget.
+          Expanded(
+            flex: 1,
+            child: Text(
+              title,
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                fontWeight: FontWeight.w500,
+              ),
+              textAlign: TextAlign.right,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
