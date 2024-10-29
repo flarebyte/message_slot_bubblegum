@@ -5,6 +5,7 @@ import 'package:slotboard_copperframe/slotboard_copperframe.dart';
 
 import 'circular_parameter_list.dart';
 import 'circular_parameter_widget.dart';
+import 'multi_circular_iterator.dart';
 
 void main() {
   runApp(const MyApp());
