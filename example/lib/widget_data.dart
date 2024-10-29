@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:grand_copperframe/grand_copperframe.dart';
 import 'package:slotboard_copperframe/slotboard_copperframe.dart';
 import 'circular_parameter_list.dart';
@@ -76,4 +77,12 @@ class MessageRepo {
       category: 'server');
   static final otherError = CopperframeMessage(
       label: 'Other error', level: CopperframeMessageLevel.error, category: '');
+}
+
+class WidgetThemeData {
+  late CircularParameterList themeData;
+  WidgetThemeData(){
+    themeData = CircularParameterList(label: 'Purple', value: ColorScheme.fromSeed(seedColor: Colors.deepPurple));
+    themeData.addParameter('Green', ColorScheme.fromSeed(seedColor: Colors.greenAccent));
+  }
 }
