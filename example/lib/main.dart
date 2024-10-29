@@ -92,12 +92,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'BubblegumMessageSlot Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Demo of BubblegumMessageSlot'),
     );
   }
 }
@@ -131,6 +131,24 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.refresh),
+            onPressed: (){
+              setState(() {
+                loopData.mainCircularIterator.reset();
+              });
+            },
+            tooltip: 'Reset Content',
+          ),
+          IconButton(
+            icon: const Icon(Icons.brightness_6),
+            onPressed:(){
+              loopData.mainCircularIterator.reset();
+            },
+            tooltip: 'Toggle Theme',
+          ),
+        ],
       ),
       body: Center(
         child: Column(
