@@ -77,7 +77,6 @@ void main() {
       circularList = CircularParameterList<String>(
         label: 'start',
         value: 'start',
-        onCycleRestart: () => callbackTriggered = true,
       );
 
       circularList.addParameter('Param1', 'Value1');
