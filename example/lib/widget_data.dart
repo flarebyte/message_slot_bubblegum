@@ -80,9 +80,15 @@ class MessageRepo {
 }
 
 class WidgetThemeData {
-  late CircularParameterList themeData;
+  late CircularParameterList<ThemeData> themeData;
   WidgetThemeData(){
-    themeData = CircularParameterList(label: 'Purple', value: ColorScheme.fromSeed(seedColor: Colors.deepPurple));
-    themeData.addParameter('Green', ColorScheme.fromSeed(seedColor: Colors.greenAccent));
+    themeData = CircularParameterList(label: 'Purple', value: ThemeData(
+      colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      useMaterial3: true,
+    ));
+    themeData.addParameter('Green', ThemeData(
+      colorScheme: ColorScheme.fromSeed(seedColor: Colors.greenAccent),
+      useMaterial3: true,
+    ));
   }
 }
