@@ -16,20 +16,20 @@ class IterationData {
   late MultiCircularIterator mainCircularIterator;
   IterationData(){
     slotMessages = CircularParameterList<List<CopperframeMessage>>(
-        label: 'single info',
-        value: [MessageRepo.longInfo]).addParameter('error and info', [
+        label: '(1) Long',
+        value: [MessageRepo.longInfo]).addParameter('(2)', [
       MessageRepo.error,
       MessageRepo.info
-    ]).addParameter('error warning info', [
+    ]).addParameter('(3)', [
       MessageRepo.error,
       MessageRepo.warning,
       MessageRepo.info
-    ]).addParameter('error and info', [
+    ]).addParameter('(4)', [
       MessageRepo.otherError,
       MessageRepo.error,
       MessageRepo.warning,
       MessageRepo.info
-    ]).addParameter('6 messages', [
+    ]).addParameter('(6)', [
       MessageRepo.info,
       MessageRepo.warning,
       MessageRepo.info,
@@ -37,12 +37,12 @@ class IterationData {
       MessageRepo.info,
       MessageRepo.warning,
     ]);
-    prominence = CircularParameterList<String>(label: 'low', value: 'low')
-        .addParameter('medium', 'medium')
-        .addParameter('high', 'high');
-    size = CircularParameterList<String>(label: 'small', value: 'small')
-        .addParameter('medium', 'medium')
-        .addParameter('large', 'large');
+    prominence = CircularParameterList<String>(label: 'Low', value: 'low')
+        .addParameter('Medium', 'medium')
+        .addParameter('High', 'high');
+    size = CircularParameterList<String>(label: 'Small', value: 'small')
+        .addParameter('Medium', 'medium')
+        .addParameter('Large', 'large');
     mainCircularIterator = MultiCircularIterator([prominence, size, slotMessages]);
 
   }

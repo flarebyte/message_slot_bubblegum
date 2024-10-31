@@ -26,26 +26,37 @@ class BubblegumMessageSlot extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: _buildDecorationByProminence(),
+      decoration: _buildDecorationByProminence(context),
       padding: const EdgeInsets.all(8.0),
       child: _buildSlotContent(context),
     );
   }
 
-  BoxDecoration _buildDecorationByProminence() {
+  BoxDecoration _buildDecorationByProminence(BuildContext context) {
     switch (slot.prominence) {
       case 'low':
-        return BoxDecoration(color: Colors.grey[200]);
+        return BoxDecoration(
+          color: Theme.of(context).cardColor,
+          border: Border.all(
+            width: 1.0,
+          ),
+        );
       case 'medium':
-        return BoxDecoration(color: Colors.white, boxShadow: [
-          BoxShadow(color: Colors.grey.shade400, blurRadius: 2),
-        ]);
+        return BoxDecoration(
+          color: Theme.of(context).cardColor,
+          border: Border.all(
+            width: 2.0,
+          ),
+        );
       case 'high':
-        return BoxDecoration(color: Colors.redAccent, boxShadow: [
-          BoxShadow(color: Colors.red.shade800, blurRadius: 4),
-        ]);
+        return BoxDecoration(
+          color: Theme.of(context).cardColor,
+          border: Border.all(
+            width: 4.0,
+          ),
+        );
       default:
-        return BoxDecoration();
+        return BoxDecoration(color: Theme.of(context).cardColor);
     }
   }
 
@@ -107,13 +118,13 @@ class BubblegumMessageSlot extends StatelessWidget {
   Color _getBadgeColor(CopperframeMessageLevel level) {
     switch (level) {
       case CopperframeMessageLevel.error:
-        return Colors.red;
+        return Colors.red.shade900;
       case CopperframeMessageLevel.warning:
-        return Colors.amber;
+        return Colors.orange.shade700;
       case CopperframeMessageLevel.info:
-        return Colors.blue;
+        return Colors.blue.shade900;
       default:
-        return Colors.grey;
+        return Colors.grey.shade800;
     }
   }
 
@@ -151,9 +162,12 @@ class BubblegumMessageSlot extends StatelessWidget {
         itemCount: displayedMessages.length,
         itemBuilder: (context, index) {
           final msg = displayedMessages[index];
-          return ListTile(
-            title: Text(msg.label),
-            leading: _getIconForMessageLevel(msg.level),
+          return Card(
+            child: ListTile(
+              title: Text(msg.label),
+              leading: _getIconForMessageLevel(msg.level),
+            ),
+            margin: EdgeInsets.fromLTRB(1, 1, 1, 1),
           );
         },
       ),
@@ -163,13 +177,13 @@ class BubblegumMessageSlot extends StatelessWidget {
   Widget _getIconForMessageLevel(CopperframeMessageLevel level) {
     switch (level) {
       case CopperframeMessageLevel.error:
-        return Icon(Icons.error, color: Colors.red);
+        return Icon(Icons.error, color: Colors.red.shade900);
       case CopperframeMessageLevel.warning:
-        return Icon(Icons.warning, color: Colors.amber);
+        return Icon(Icons.warning, color: Colors.orange.shade700);
       case CopperframeMessageLevel.info:
-        return Icon(Icons.info, color: Colors.blue);
+        return Icon(Icons.info, color: Colors.blue.shade900);
       default:
-        return Icon(Icons.message, color: Colors.grey);
+        return Icon(Icons.message, color: Colors.grey.shade800);
     }
   }
 

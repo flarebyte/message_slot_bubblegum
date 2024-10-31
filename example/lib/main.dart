@@ -64,6 +64,8 @@ class _MyAppState extends State<MyApp> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               CircularParameterWidget(
+                  title: 'Theme', parameterList: themeData),
+              CircularParameterWidget(
                   title: 'Size', parameterList: loopData.size),
               CircularParameterWidget(
                   title: 'Prominence', parameterList: loopData.prominence),
