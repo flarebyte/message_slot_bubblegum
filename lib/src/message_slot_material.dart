@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grand_copperframe/grand_copperframe.dart';
-import 'package:message_slot_bubblegum/src/bubblegum_message_widget.dart';
+import 'package:message_slot_bubblegum/src/message_bar_slot.dart';
+import 'package:message_slot_bubblegum/src/message_widget.dart';
 import 'package:slotboard_copperframe/slotboard_copperframe.dart';
 
 import 'message_helper.dart';
@@ -74,7 +75,11 @@ class BubblegumMessageSlot extends StatelessWidget {
   Widget _buildSlotContent(BuildContext context) {
     switch (slot.size) {
       case 'bar':
-        return _buildBarSlot();
+        return BubblegumMessageBarSlot(
+            slot: slot,
+            showBadgesWhenEmpty: showBadgesWhenEmpty,
+            messages: messages,
+            context: context);
       case 'small':
         return _buildMessageList(2);
       case 'medium':
@@ -84,30 +89,6 @@ class BubblegumMessageSlot extends StatelessWidget {
       default:
         return const SizedBox.shrink();
     }
-  }
-
-  Widget _buildBarSlot(BuildContext context) {
-    return Row(
-      children: [
-        Icon(Icons.info, color: Colors.blue),
-        const SizedBox(width: 8),
-        Text(slot.title, style: TextStyle(fontWeight: FontWeight.bold)),
-        const Spacer(),
-        Tooltip(message: slot.description, child: const Icon(Icons.help)),
-        const SizedBox(width: 8),
-        if (showBadgesWhenEmpty || messages.isNotEmpty) _buildBadges(context),
-      ],
-    );
-  }
-
-  Widget _buildBadges(BuildContext context) {
-    return Row(
-      children: [
-        BubblegumMessageBadgeWidget(messages: messages, showBadgesWhenEmpty: showBadgesWhenEmpty, context: context, level: CopperframeMessageLevel.error),
-        BubblegumMessageBadgeWidget(messages: messages, showBadgesWhenEmpty: showBadgesWhenEmpty, context: context, level: CopperframeMessageLevel.warning),
-        BubblegumMessageBadgeWidget(messages: messages, showBadgesWhenEmpty: showBadgesWhenEmpty, context: context, level: CopperframeMessageLevel.info),
-      ],
-    );
   }
 
   Widget _buildMessageList(int maxMessages) {
@@ -141,40 +122,6 @@ class BubblegumMessageSlot extends StatelessWidget {
           return BubblegumMessageWidget(msg: msg);
         },
       ),
-    );
-  }
-}
-
-class BubblegumMessageBadgeWidget extends StatelessWidget {
-  const BubblegumMessageBadgeWidget({
-    super.key,
-    required this.messages,
-    required this.showBadgesWhenEmpty,
-    required this.context,
-    required this.level,
-  });
-
-  final List<CopperframeMessage> messages;
-  final bool showBadgesWhenEmpty;
-  final BuildContext context;
-  final CopperframeMessageLevel level;
-
-  @override
-  Widget build(BuildContext context) {
-    final themeData = Theme.of(context);
-    final int count =
-        BubblegumMessageHelper.getMessageCountByLevel(messages, level);
-    if (count == 0 && !showBadgesWhenEmpty) {
-      return const SizedBox.shrink();
-    }
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 4),
-      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-      decoration: BoxDecoration(
-        color: BubblegumMessageSlotTheme.getBadgeColor(themeData, level),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Text('$count'),
     );
   }
 }

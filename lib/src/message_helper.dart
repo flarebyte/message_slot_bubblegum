@@ -15,7 +15,8 @@ class BubblegumMessageHelper {
     return [...errors, ...warnings, ...info];
   }
 
-  static int getMessageCountByLevel(List<CopperframeMessage> messages, CopperframeMessageLevel level) {
+  static int getMessageCountByLevel(
+      List<CopperframeMessage> messages, CopperframeMessageLevel level) {
     return messages.where((msg) => msg.level == level).length;
   }
 }

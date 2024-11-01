@@ -10,7 +10,8 @@ class BubblegumMessageSlotTheme {
     }
   }
 
-  static Color getBadgeColor(ThemeData themeData, CopperframeMessageLevel level) {
+  static Color getBadgeColor(
+      ThemeData themeData, CopperframeMessageLevel level) {
     switch (level) {
       case CopperframeMessageLevel.error:
         return Colors.red.shade900;
