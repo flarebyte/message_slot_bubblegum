@@ -34,12 +34,12 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'BubblegumMessageSlot Demo',
+      title: 'BubblegumMessageSlot',
       theme: themeData.current().value,
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: const Text('Demo of BubblegumMessageSlot'),
+          title: const Text('BubblegumMessageSlot'),
           actions: [
             IconButton(
               icon: const Icon(Icons.refresh),
