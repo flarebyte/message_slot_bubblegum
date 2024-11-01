@@ -78,8 +78,7 @@ class BubblegumMessageSlot extends StatelessWidget {
         return BubblegumMessageBarSlot(
             slot: slot,
             showBadgesWhenEmpty: showBadgesWhenEmpty,
-            messages: messages,
-            context: context);
+            messages: messages);
       case 'small':
         return _buildMessageList(2);
       case 'medium':

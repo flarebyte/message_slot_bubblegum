@@ -9,13 +9,11 @@ class BubblegumMessageBadgeWidget extends StatelessWidget {
     super.key,
     required this.messages,
     required this.showBadgesWhenEmpty,
-    required this.context,
     required this.level,
   });
 
   final List<CopperframeMessage> messages;
   final bool showBadgesWhenEmpty;
-  final BuildContext context;
   final CopperframeMessageLevel level;
 
   @override
@@ -43,12 +41,10 @@ class BubblegumLevelBadgeWidget extends StatelessWidget {
     super.key,
     required this.messages,
     required this.showBadgesWhenEmpty,
-    required this.context,
   });
 
   final List<CopperframeMessage> messages;
   final bool showBadgesWhenEmpty;
-  final BuildContext context;
 
   @override
   Widget build(BuildContext context) {
@@ -57,17 +53,14 @@ class BubblegumLevelBadgeWidget extends StatelessWidget {
         BubblegumMessageBadgeWidget(
             messages: messages,
             showBadgesWhenEmpty: showBadgesWhenEmpty,
-            context: context,
             level: CopperframeMessageLevel.error),
         BubblegumMessageBadgeWidget(
             messages: messages,
             showBadgesWhenEmpty: showBadgesWhenEmpty,
-            context: context,
             level: CopperframeMessageLevel.warning),
         BubblegumMessageBadgeWidget(
             messages: messages,
             showBadgesWhenEmpty: showBadgesWhenEmpty,
-            context: context,
             level: CopperframeMessageLevel.info),
       ],
     );

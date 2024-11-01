@@ -10,13 +10,11 @@ class BubblegumMessageBarSlot extends StatelessWidget {
     required this.slot,
     required this.showBadgesWhenEmpty,
     required this.messages,
-    required this.context,
   });
 
   final CopperframeSlotBase slot;
   final bool showBadgesWhenEmpty;
   final List<CopperframeMessage> messages;
-  final BuildContext context;
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +28,7 @@ class BubblegumMessageBarSlot extends StatelessWidget {
         const SizedBox(width: 8),
         if (showBadgesWhenEmpty || messages.isNotEmpty)
           BubblegumLevelBadgeWidget(
-              messages: messages,
-              showBadgesWhenEmpty: showBadgesWhenEmpty,
-              context: context),
+              messages: messages, showBadgesWhenEmpty: showBadgesWhenEmpty),
       ],
     );
   }
