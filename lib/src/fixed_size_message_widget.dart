@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:grand_copperframe/grand_copperframe.dart';
 import 'package:slotboard_copperframe/slotboard_copperframe.dart';
 
+import 'message_bar_slot.dart';
 import 'message_helper.dart';
 import 'message_widget.dart';
 
@@ -28,15 +29,18 @@ class BubblegumFixedSizeMessageWidget extends StatelessWidget {
         : messages;
     final int limit = messageLimits[slot.size] ?? maxMessages;
     final limitedMessages = displayedMessages.take(limit).toList();
+    final messageTiles = limitedMessages
+        .map((msg) => ListTile(
+              title: Text(msg.label),
+              leading: MessageLevelIcon(level: msg.level),
+            ))
+        .toList();
+    final header = BubblegumMessageBarSlot(
+        slot: slot, showBadgesWhenEmpty: false, messages: messages);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: limitedMessages
-          .map((msg) => ListTile(
-                title: Text(msg.label),
-                leading: MessageLevelIcon(level: msg.level),
-              ))
-          .toList(),
+      children: [header, ...messageTiles],
     );
   }
 }
