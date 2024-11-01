@@ -39,7 +39,8 @@ class IterationData {
         .addParameter('High', 'high');
     size = CircularParameterList<String>(label: 'Small', value: 'small')
         .addParameter('Medium', 'medium')
-        .addParameter('Large', 'large');
+        .addParameter('Large', 'large')
+        .addParameter('Bar', 'bar');
     mainCircularIterator =
         MultiCircularIterator([prominence, size, slotMessages]);
   }
