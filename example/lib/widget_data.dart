@@ -4,7 +4,6 @@ import 'package:slotboard_copperframe/slotboard_copperframe.dart';
 import 'circular_parameter_list.dart';
 import 'multi_circular_iterator.dart';
 
-
 class InfoSlot extends CopperframeSlotBase {
   InfoSlot({required super.tags});
 }
@@ -14,13 +13,11 @@ class IterationData {
   late CircularParameterList prominence;
   late CircularParameterList size;
   late MultiCircularIterator mainCircularIterator;
-  IterationData(){
+  IterationData() {
     slotMessages = CircularParameterList<List<CopperframeMessage>>(
-        label: '(1) Long',
-        value: [MessageRepo.longInfo]).addParameter('(2)', [
-      MessageRepo.error,
-      MessageRepo.info
-    ]).addParameter('(3)', [
+            label: '(1) Long', value: [MessageRepo.longInfo])
+        .addParameter(
+            '(2)', [MessageRepo.error, MessageRepo.info]).addParameter('(3)', [
       MessageRepo.error,
       MessageRepo.warning,
       MessageRepo.info
@@ -43,8 +40,8 @@ class IterationData {
     size = CircularParameterList<String>(label: 'Small', value: 'small')
         .addParameter('Medium', 'medium')
         .addParameter('Large', 'large');
-    mainCircularIterator = MultiCircularIterator([prominence, size, slotMessages]);
-
+    mainCircularIterator =
+        MultiCircularIterator([prominence, size, slotMessages]);
   }
 }
 
@@ -55,12 +52,12 @@ class MessageRepo {
       category: 'privacy');
   static final longInfo = CopperframeMessage(
       label:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tincidunt massa sem, et pulvinar dolor sollicitudin vitae. Suspendisse porta nunc leo, eu sagittis tellus facilisis vitae. Integer placerat hendrerit ipsum, ac ornare justo blandit vel. Vivamus finibus tortor diam, in volutpat nibh semper vel. Proin mi ex, blandit rhoncus sodales',
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tincidunt massa sem, et pulvinar dolor sollicitudin vitae. Suspendisse porta nunc leo, eu sagittis tellus facilisis vitae. Integer placerat hendrerit ipsum, ac ornare justo blandit vel. Vivamus finibus tortor diam, in volutpat nibh semper vel. Proin mi ex, blandit rhoncus sodales',
       level: CopperframeMessageLevel.info,
       category: 'privacy');
   static final veryLongInfo = CopperframeMessage(
       label:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin non lorem sit amet tellus semper vestibulum. Cras sit amet purus aliquam lacus finibus fringilla. Donec nulla odio, gravida quis eros ac, consectetur feugiat est. Sed et mauris vel metus lacinia ullamcorper. Cras bibendum nisl semper sem vehicula dictum. Nam et felis risus. Suspendisse iaculis lacus nec finibus fermentum. Ut tempor faucibus augue at facilisis. Duis id facilisis augue. Etiam tellus purus, scelerisque vitae posuere ac, pretium ac nisl. Quisque a congue mi, in hendrerit ipsum. Duis sed fermentum metus. Phasellus tempor eu ligula ut laoreet. Fusce varius in massa sit.',
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin non lorem sit amet tellus semper vestibulum. Cras sit amet purus aliquam lacus finibus fringilla. Donec nulla odio, gravida quis eros ac, consectetur feugiat est. Sed et mauris vel metus lacinia ullamcorper. Cras bibendum nisl semper sem vehicula dictum. Nam et felis risus. Suspendisse iaculis lacus nec finibus fermentum. Ut tempor faucibus augue at facilisis. Duis id facilisis augue. Etiam tellus purus, scelerisque vitae posuere ac, pretium ac nisl. Quisque a congue mi, in hendrerit ipsum. Duis sed fermentum metus. Phasellus tempor eu ligula ut laoreet. Fusce varius in massa sit.',
       level: CopperframeMessageLevel.info,
       category: 'privacy');
   static final warning = CopperframeMessage(
@@ -81,14 +78,19 @@ class MessageRepo {
 
 class WidgetThemeData {
   late CircularParameterList<ThemeData> themeData;
-  WidgetThemeData(){
-    themeData = CircularParameterList(label: 'Purple', value: ThemeData(
-      colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      useMaterial3: true,
-    ));
-    themeData.addParameter('Green', ThemeData(
-      colorScheme: ColorScheme.fromSeed(seedColor: Colors.greenAccent),
-      useMaterial3: true,
-    ));
+  WidgetThemeData() {
+    themeData = CircularParameterList(
+        label: 'Purple',
+        value: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ));
+    themeData.addParameter(
+        'Green',
+        ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.greenAccent),
+          useMaterial3: true,
+        ));
+    themeData.addParameter('Dark', ThemeData.dark(useMaterial3: true));
   }
 }

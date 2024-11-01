@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:grand_copperframe/grand_copperframe.dart';
 import 'package:slotboard_copperframe/slotboard_copperframe.dart';
 
+import 'message_helper.dart';
+import 'message_slot_theme.dart';
+
 class BubblegumMessageSlot extends StatelessWidget {
   final CopperframeSlotBase slot;
   final List<CopperframeMessage> messages;
@@ -33,30 +36,36 @@ class BubblegumMessageSlot extends StatelessWidget {
   }
 
   BoxDecoration _buildDecorationByProminence(BuildContext context) {
+    final themeData = Theme.of(context);
+
     switch (slot.prominence) {
       case 'low':
         return BoxDecoration(
-          color: Theme.of(context).cardColor,
+          border: Border.all(
+              width: 1.0,
+              color: BubblegumMessageSlotTheme.colorOfSlot(themeData)),
+          borderRadius: BorderRadius.circular(12),
+        );
+      case 'medium':
+        return BoxDecoration(
+          border: Border.all(
+              width: 2.0,
+              color: BubblegumMessageSlotTheme.colorOfSlot(themeData)),
+          borderRadius: BorderRadius.circular(12),
+        );
+      case 'high':
+        return BoxDecoration(
+          border: Border.all(
+              width: 4.0,
+              color: BubblegumMessageSlotTheme.colorOfSlot(themeData)),
+          borderRadius: BorderRadius.circular(12),
+        );
+      default:
+        return BoxDecoration(
           border: Border.all(
             width: 1.0,
           ),
         );
-      case 'medium':
-        return BoxDecoration(
-          color: Theme.of(context).cardColor,
-          border: Border.all(
-            width: 2.0,
-          ),
-        );
-      case 'high':
-        return BoxDecoration(
-          color: Theme.of(context).cardColor,
-          border: Border.all(
-            width: 4.0,
-          ),
-        );
-      default:
-        return BoxDecoration(color: Theme.of(context).cardColor);
     }
   }
 
@@ -137,8 +146,9 @@ class BubblegumMessageSlot extends StatelessWidget {
   }
 
   Widget _buildMessageList(int maxMessages) {
-    final List<CopperframeMessage> displayedMessages =
-        groupMessagesByLevel ? _groupMessages() : messages;
+    final List<CopperframeMessage> displayedMessages = groupMessagesByLevel
+        ? BubblegumMessageHelper.groupMessages(messages)
+        : messages;
     final int limit = messageLimits[slot.size] ?? maxMessages;
     final limitedMessages = displayedMessages.take(limit).toList();
 
@@ -154,8 +164,9 @@ class BubblegumMessageSlot extends StatelessWidget {
   }
 
   Widget _buildScrollableMessageList() {
-    final List<CopperframeMessage> displayedMessages =
-        groupMessagesByLevel ? _groupMessages() : messages;
+    final List<CopperframeMessage> displayedMessages = groupMessagesByLevel
+        ? BubblegumMessageHelper.groupMessages(messages)
+        : messages;
 
     return Scrollbar(
       child: ListView.builder(
@@ -166,19 +177,6 @@ class BubblegumMessageSlot extends StatelessWidget {
         },
       ),
     );
-  }
-
-  List<CopperframeMessage> _groupMessages() {
-    final errors = messages
-        .where((msg) => msg.level == CopperframeMessageLevel.error)
-        .toList();
-    final warnings = messages
-        .where((msg) => msg.level == CopperframeMessageLevel.warning)
-        .toList();
-    final info = messages
-        .where((msg) => msg.level == CopperframeMessageLevel.info)
-        .toList();
-    return [...errors, ...warnings, ...info];
   }
 }
 
