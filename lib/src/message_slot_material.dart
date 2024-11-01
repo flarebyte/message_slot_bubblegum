@@ -147,7 +147,7 @@ class BubblegumMessageSlot extends StatelessWidget {
       children: limitedMessages
           .map((msg) => ListTile(
                 title: Text(msg.label),
-                leading: _getIconForMessageLevel(msg.level),
+                leading: MessageLevelIcon(level: msg.level),
               ))
           .toList(),
     );
@@ -162,29 +162,10 @@ class BubblegumMessageSlot extends StatelessWidget {
         itemCount: displayedMessages.length,
         itemBuilder: (context, index) {
           final msg = displayedMessages[index];
-          return Card(
-            child: ListTile(
-              title: Text(msg.label),
-              leading: _getIconForMessageLevel(msg.level),
-            ),
-            margin: EdgeInsets.fromLTRB(1, 1, 1, 1),
-          );
+          return BuublegumMessageWidget(msg: msg);
         },
       ),
     );
-  }
-
-  Widget _getIconForMessageLevel(CopperframeMessageLevel level) {
-    switch (level) {
-      case CopperframeMessageLevel.error:
-        return Icon(Icons.error, color: Colors.red.shade900);
-      case CopperframeMessageLevel.warning:
-        return Icon(Icons.warning, color: Colors.orange.shade700);
-      case CopperframeMessageLevel.info:
-        return Icon(Icons.info, color: Colors.blue.shade900);
-      default:
-        return Icon(Icons.message, color: Colors.grey.shade800);
-    }
   }
 
   List<CopperframeMessage> _groupMessages() {
@@ -198,5 +179,46 @@ class BubblegumMessageSlot extends StatelessWidget {
         .where((msg) => msg.level == CopperframeMessageLevel.info)
         .toList();
     return [...errors, ...warnings, ...info];
+  }
+}
+
+class BuublegumMessageWidget extends StatelessWidget {
+  const BuublegumMessageWidget({
+    super.key,
+    required this.msg,
+  });
+
+  final CopperframeMessage msg;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 6,
+      margin: const EdgeInsets.all(10),
+      child: BuublegumMessageWidget(msg: msg),
+    );
+  }
+}
+
+class MessageLevelIcon extends StatelessWidget {
+  const MessageLevelIcon({
+    super.key,
+    required this.level,
+  });
+
+  final CopperframeMessageLevel level;
+
+  @override
+  Widget build(BuildContext context) {
+    switch (level) {
+      case CopperframeMessageLevel.error:
+        return Icon(Icons.error, color: Colors.red.shade900);
+      case CopperframeMessageLevel.warning:
+        return Icon(Icons.warning, color: Colors.orange.shade700);
+      case CopperframeMessageLevel.info:
+        return Icon(Icons.info, color: Colors.blue.shade900);
+      default:
+        return Icon(Icons.message, color: Colors.grey.shade800);
+    }
   }
 }
