@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:grand_copperframe/grand_copperframe.dart';
 import 'package:message_slot_bubblegum/src/message_bar_slot.dart';
-import 'package:message_slot_bubblegum/src/message_widget.dart';
 import 'package:slotboard_copperframe/slotboard_copperframe.dart';
 
-import 'message_helper.dart';
+import 'fixed_size_message_widget.dart';
 import 'message_slot_theme.dart';
+import 'scrollable_message_widget.dart';
 
 class BubblegumMessageSlot extends StatelessWidget {
   final CopperframeSlotBase slot;
@@ -43,32 +43,17 @@ class BubblegumMessageSlot extends StatelessWidget {
 
     switch (slot.prominence) {
       case 'low':
-        return BoxDecoration(
-          border: Border.all(
-              width: 1.0,
-              color: BubblegumMessageSlotTheme.colorOfSlot(themeData)),
-          borderRadius: BorderRadius.circular(12),
-        );
+        return BubblegumMessageSlotTheme.getSlotBoxDecoration(
+            themeData: themeData, shirtSize: TShirtSize.small);
       case 'medium':
-        return BoxDecoration(
-          border: Border.all(
-              width: 2.0,
-              color: BubblegumMessageSlotTheme.colorOfSlot(themeData)),
-          borderRadius: BorderRadius.circular(12),
-        );
+        return BubblegumMessageSlotTheme.getSlotBoxDecoration(
+            themeData: themeData, shirtSize: TShirtSize.medium);
       case 'high':
-        return BoxDecoration(
-          border: Border.all(
-              width: 4.0,
-              color: BubblegumMessageSlotTheme.colorOfSlot(themeData)),
-          borderRadius: BorderRadius.circular(12),
-        );
+        return BubblegumMessageSlotTheme.getSlotBoxDecoration(
+            themeData: themeData, shirtSize: TShirtSize.large);
       default:
-        return BoxDecoration(
-          border: Border.all(
-            width: 1.0,
-          ),
-        );
+        return BubblegumMessageSlotTheme.getSlotBoxDecoration(
+            themeData: themeData, shirtSize: TShirtSize.small);
     }
   }
 
@@ -80,47 +65,24 @@ class BubblegumMessageSlot extends StatelessWidget {
             showBadgesWhenEmpty: showBadgesWhenEmpty,
             messages: messages);
       case 'small':
-        return _buildMessageList(2);
+        return BubblegumFixedSizeMessageWidget(
+            groupMessagesByLevel: groupMessagesByLevel,
+            messages: messages,
+            messageLimits: messageLimits,
+            slot: slot,
+            maxMessages: 2);
       case 'medium':
-        return _buildMessageList(5);
+        return BubblegumFixedSizeMessageWidget(
+            groupMessagesByLevel: groupMessagesByLevel,
+            messages: messages,
+            messageLimits: messageLimits,
+            slot: slot,
+            maxMessages: 5);
       case 'large':
-        return _buildScrollableMessageList();
+        return BubblegumScrollableMessageWidget(
+            groupMessagesByLevel: groupMessagesByLevel, messages: messages);
       default:
         return const SizedBox.shrink();
     }
-  }
-
-  Widget _buildMessageList(int maxMessages) {
-    final List<CopperframeMessage> displayedMessages = groupMessagesByLevel
-        ? BubblegumMessageHelper.groupMessages(messages)
-        : messages;
-    final int limit = messageLimits[slot.size] ?? maxMessages;
-    final limitedMessages = displayedMessages.take(limit).toList();
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: limitedMessages
-          .map((msg) => ListTile(
-                title: Text(msg.label),
-                leading: MessageLevelIcon(level: msg.level),
-              ))
-          .toList(),
-    );
-  }
-
-  Widget _buildScrollableMessageList() {
-    final List<CopperframeMessage> displayedMessages = groupMessagesByLevel
-        ? BubblegumMessageHelper.groupMessages(messages)
-        : messages;
-
-    return Scrollbar(
-      child: ListView.builder(
-        itemCount: displayedMessages.length,
-        itemBuilder: (context, index) {
-          final msg = displayedMessages[index];
-          return BubblegumMessageWidget(msg: msg);
-        },
-      ),
-    );
   }
 }

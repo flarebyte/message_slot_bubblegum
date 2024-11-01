@@ -1,0 +1,42 @@
+import 'package:flutter/material.dart';
+import 'package:grand_copperframe/grand_copperframe.dart';
+import 'package:slotboard_copperframe/slotboard_copperframe.dart';
+
+import 'message_helper.dart';
+import 'message_widget.dart';
+
+class BubblegumFixedSizeMessageWidget extends StatelessWidget {
+  const BubblegumFixedSizeMessageWidget({
+    super.key,
+    required this.groupMessagesByLevel,
+    required this.messages,
+    required this.messageLimits,
+    required this.slot,
+    required this.maxMessages,
+  });
+
+  final bool groupMessagesByLevel;
+  final List<CopperframeMessage> messages;
+  final Map<String, int> messageLimits;
+  final CopperframeSlotBase slot;
+  final int maxMessages;
+
+  @override
+  Widget build(BuildContext context) {
+    final List<CopperframeMessage> displayedMessages = groupMessagesByLevel
+        ? BubblegumMessageHelper.groupMessages(messages)
+        : messages;
+    final int limit = messageLimits[slot.size] ?? maxMessages;
+    final limitedMessages = displayedMessages.take(limit).toList();
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: limitedMessages
+          .map((msg) => ListTile(
+                title: Text(msg.label),
+                leading: MessageLevelIcon(level: msg.level),
+              ))
+          .toList(),
+    );
+  }
+}
