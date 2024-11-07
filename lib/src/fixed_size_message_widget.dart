@@ -33,7 +33,7 @@ class BubblegumFixedSizeMessageWidget extends StatelessWidget {
     final limitedMessages = displayedMessages.take(limit).toList();
     final messageTiles = limitedMessages
         .map((msg) => ListTile(
-              title: Text(msg.label),
+              title: Text(msg.label, textAlign: TextAlign.justify),
               leading: MessageLevelIcon(level: msg.level),
             ))
         .toList();

@@ -48,7 +48,7 @@ class IterationData {
 
 class MessageRepo {
   static final info = CopperframeMessage(
-      label: 'Some info',
+      label: 'Info Lorem ipsum dolor sit amet, 😊 consectetur adipiscing elit.',
       level: CopperframeMessageLevel.info,
       category: 'privacy');
   static final longInfo = CopperframeMessage(
@@ -62,19 +62,19 @@ class MessageRepo {
       level: CopperframeMessageLevel.info,
       category: 'privacy');
   static final warning = CopperframeMessage(
-      label: 'Some warning',
+      label: 'Warning Lorem ipsum dolor 😈 sit amet, consectetur adipiscing elit. Proin non lorem sit amet tellus semper vestibulum.',
       level: CopperframeMessageLevel.warning,
       category: 'validation');
   static final otherWarning = CopperframeMessage(
-      label: 'Other warning',
+      label: 'Other warning Cras sit amet purus aliquam lacus finibus fringilla. Donec nulla odio, gravida quis eros ac, consectetur feugiat est.',
       level: CopperframeMessageLevel.warning,
       category: 'validation');
   static final error = CopperframeMessage(
-      label: 'Some error',
+      label: 'Some error Cras sit amet purus aliquam lacus finibus fringilla. Donec nulla odio, gravida quis eros ac, consectetur feugiat est.',
       level: CopperframeMessageLevel.error,
       category: 'server');
   static final otherError = CopperframeMessage(
-      label: 'Other error', level: CopperframeMessageLevel.error, category: '');
+      label: 'Other error Cras sit amet purus aliquam lacus finibus fringilla. Donec nulla odio, gravida quis eros ac, consectetur feugiat est.', level: CopperframeMessageLevel.error, category: '');
 }
 
 class WidgetThemeData {
