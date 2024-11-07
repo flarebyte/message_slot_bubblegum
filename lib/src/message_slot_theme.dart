@@ -20,6 +20,14 @@ class BubblegumMessageSlotTheme {
     }
   }
 
+  static Color colorOfHeaderDivider(ThemeData themeData) {
+    if (themeData.colorScheme.brightness == Brightness.light) {
+      return Colors.grey.shade500;
+    } else {
+      return Colors.white70;
+    }
+  }
+
   static Color getBadgeColor(
       ThemeData themeData, CopperframeMessageLevel level) {
     switch (level) {

@@ -4,6 +4,7 @@ import 'package:slotboard_copperframe/slotboard_copperframe.dart';
 
 import 'message_bar_slot.dart';
 import 'message_helper.dart';
+import 'message_slot_theme.dart';
 import 'message_widget.dart';
 
 class BubblegumFixedSizeMessageWidget extends StatelessWidget {
@@ -24,6 +25,7 @@ class BubblegumFixedSizeMessageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeData = Theme.of(context);
     final List<CopperframeMessage> displayedMessages = groupMessagesByLevel
         ? BubblegumMessageHelper.groupMessages(messages)
         : messages;
@@ -37,7 +39,8 @@ class BubblegumFixedSizeMessageWidget extends StatelessWidget {
         .toList();
     final header = BubblegumMessageBarSlot(
         slot: slot, showBadgesWhenEmpty: false, messages: messages);
-    const dividerHeader = Divider();
+    final dividerHeader = Divider(
+        color: BubblegumMessageSlotTheme.colorOfHeaderDivider(themeData));
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
