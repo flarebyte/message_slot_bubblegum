@@ -31,6 +31,7 @@ class BubblegumFixedSizeMessageWidget extends StatelessWidget {
         : messages;
     final int limit = messageLimits[slot.size] ?? maxMessages;
     final limitedMessages = displayedMessages.take(limit).toList();
+    final isAboveLimit = displayedMessages.length > limitedMessages.length;
     final messageTiles = limitedMessages
         .map((msg) => ListTile(
               title: Text(msg.label, textAlign: TextAlign.justify),
@@ -41,10 +42,12 @@ class BubblegumFixedSizeMessageWidget extends StatelessWidget {
         slot: slot, showBadgesWhenEmpty: false, messages: messages);
     final dividerHeader = Divider(
         color: BubblegumMessageSlotTheme.colorOfHeaderDivider(themeData));
-
+    final toContinue= isAboveLimit ? [const ListTile(
+              title: Text('...', textAlign: TextAlign.center),
+            )]: [];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [header, dividerHeader, ...messageTiles],
+      children: [header, dividerHeader, ...messageTiles, ...toContinue],
     );
   }
 }

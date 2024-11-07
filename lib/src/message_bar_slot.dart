@@ -20,7 +20,6 @@ class BubblegumMessageBarSlot extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Icon(Icons.markunread_sharp, color: Colors.blue),
         const SizedBox(width: 8),
         Text(slot.title.toUpperCase(), style: TextStyle(fontWeight: FontWeight.bold)),
         const Spacer(),
