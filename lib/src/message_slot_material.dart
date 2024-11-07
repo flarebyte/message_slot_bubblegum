@@ -5,7 +5,6 @@ import 'package:slotboard_copperframe/slotboard_copperframe.dart';
 
 import 'fixed_size_message_widget.dart';
 import 'message_slot_theme.dart';
-import 'scrollable_message_widget.dart';
 
 class BubblegumMessageSlot extends StatelessWidget {
   final CopperframeSlotBase slot;
@@ -23,7 +22,7 @@ class BubblegumMessageSlot extends StatelessWidget {
       'bar': 0,
       'small': 2,
       'medium': 5,
-      'large': -1, // Unlimited
+      'large': 8,
     },
     this.groupMessagesByLevel = false,
   }) : super(key: key);
@@ -79,10 +78,17 @@ class BubblegumMessageSlot extends StatelessWidget {
             slot: slot,
             maxMessages: 5);
       case 'large':
-        return BubblegumScrollableMessageWidget(
-            groupMessagesByLevel: groupMessagesByLevel, messages: messages);
+        return BubblegumFixedSizeMessageWidget(
+            groupMessagesByLevel: groupMessagesByLevel,
+            messages: messages,
+            messageLimits: messageLimits,
+            slot: slot,
+            maxMessages: 8);
       default:
-        return const SizedBox.shrink();
+        return BubblegumMessageBarSlot(
+            slot: slot,
+            showBadgesWhenEmpty: showBadgesWhenEmpty,
+            messages: messages);
     }
   }
 }
