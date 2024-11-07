@@ -37,10 +37,11 @@ class BubblegumFixedSizeMessageWidget extends StatelessWidget {
         .toList();
     final header = BubblegumMessageBarSlot(
         slot: slot, showBadgesWhenEmpty: false, messages: messages);
+    const dividerHeader = Divider();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [header, ...messageTiles],
+      children: [header, dividerHeader, ...messageTiles],
     );
   }
 }
