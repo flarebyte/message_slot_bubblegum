@@ -42,9 +42,14 @@ class BubblegumFixedSizeMessageWidget extends StatelessWidget {
         slot: slot, showBadgesWhenEmpty: false, messages: messages);
     final dividerHeader = Divider(
         color: BubblegumMessageSlotTheme.colorOfHeaderDivider(themeData));
-    final toContinue= isAboveLimit ? [const ListTile(
+    final toContinue = isAboveLimit
+        ? [
+            const ListTile(
               title: Text('...', textAlign: TextAlign.center),
-            )]: [];
+              visualDensity: VisualDensity(vertical: VisualDensity.minimumDensity),
+            )
+          ]
+        : [];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [header, dividerHeader, ...messageTiles, ...toContinue],
