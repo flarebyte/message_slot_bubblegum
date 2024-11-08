@@ -44,10 +44,9 @@ class BubblegumFixedSizeMessageWidget extends StatelessWidget {
         color: BubblegumMessageSlotTheme.colorOfHeaderDivider(themeData));
     final toContinue = isAboveLimit
         ? [
-            const ListTile(
-              title: Text('...', textAlign: TextAlign.center),
-              visualDensity: VisualDensity(vertical: VisualDensity.minimumDensity),
-            )
+            Align(
+                alignment: Alignment.centerRight,
+                child: Icon(Icons.keyboard_arrow_right, color: Colors.red.shade900)),
           ]
         : [];
     return Column(
