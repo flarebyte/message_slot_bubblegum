@@ -36,6 +36,14 @@ class BubblegumFixedSizeMessageWidget extends StatelessWidget {
         .map((msg) => ListTile(
               title: Text(msg.label, textAlign: TextAlign.justify),
               leading: MessageLevelIcon(level: msg.level),
+              trailing: msg.level == CopperframeMessageLevel.info
+                  ? IconButton(
+                      icon: const Icon(Icons.toc),
+                      onPressed: () {
+                        // Handle fix button press
+                      },
+                    )
+                  : null,
             ))
         .toList();
     final header = BubblegumMessageBarSlot(
@@ -44,9 +52,9 @@ class BubblegumFixedSizeMessageWidget extends StatelessWidget {
         color: BubblegumMessageSlotTheme.colorOfHeaderDivider(themeData));
     final toContinue = isAboveLimit
         ? [
-            Align(
+            const Align(
                 alignment: Alignment.centerRight,
-                child: Icon(Icons.keyboard_arrow_right, color: Colors.red.shade900)),
+                child: Icon(Icons.more_horiz_sharp)),
           ]
         : [];
     return Column(

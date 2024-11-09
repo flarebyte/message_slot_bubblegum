@@ -32,13 +32,13 @@ class BubblegumMessageSlotTheme {
       ThemeData themeData, CopperframeMessageLevel level) {
     switch (level) {
       case CopperframeMessageLevel.error:
-        return Colors.red.shade900;
+        return Colors.red.shade600;
       case CopperframeMessageLevel.warning:
-        return Colors.orange.shade700;
+        return Colors.orange.shade600;
       case CopperframeMessageLevel.info:
-        return Colors.blue.shade900;
+        return Colors.blue.shade600;
       default:
-        return Colors.grey.shade800;
+        return Colors.grey.shade600;
     }
   }
 
