@@ -35,16 +35,16 @@ class MessageLevelIcon extends StatelessWidget {
     switch (level) {
       case CopperframeMessageLevel.error:
         return Icon(Icons.error,
-            color: BubblegumMessageSlotTheme.getBadgeColor(themeData, level));
+            color: BubblegumMessageSlotTheme.getLevelColor(themeData, level));
       case CopperframeMessageLevel.warning:
         return Icon(Icons.warning,
-            color: BubblegumMessageSlotTheme.getBadgeColor(themeData, level));
+            color: BubblegumMessageSlotTheme.getLevelColor(themeData, level));
       case CopperframeMessageLevel.info:
         return Icon(Icons.info,
-            color: BubblegumMessageSlotTheme.getBadgeColor(themeData, level));
+            color: BubblegumMessageSlotTheme.getLevelColor(themeData, level));
       default:
         return Icon(Icons.message,
-            color: BubblegumMessageSlotTheme.getBadgeColor(themeData, level));
+            color: BubblegumMessageSlotTheme.getLevelColor(themeData, level));
     }
   }
 }

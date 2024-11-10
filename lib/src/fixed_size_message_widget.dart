@@ -34,17 +34,16 @@ class BubblegumFixedSizeMessageWidget extends StatelessWidget {
     final isAboveLimit = displayedMessages.length > limitedMessages.length;
     final messageTiles = limitedMessages
         .map((msg) => ListTile(
-              title: Text(msg.label, textAlign: TextAlign.justify),
-              leading: MessageLevelIcon(level: msg.level),
-              trailing: msg.level == CopperframeMessageLevel.info
-                  ? IconButton(
-                      icon: const Icon(Icons.toc),
-                      onPressed: () {
-                        // Handle fix button press
-                      },
-                    )
-                  : null,
-            ))
+            title: Text(msg.label, textAlign: TextAlign.justify),
+            leading: Chip(
+              side: BorderSide.none,
+              label: Text(msg.level.name.toUpperCase(),
+                  style: TextStyle(
+                      fontSize: 8,
+                      fontWeight: FontWeight.bold,
+                      color: BubblegumMessageSlotTheme.getLevelColor(
+                          themeData, msg.level))),
+            )))
         .toList();
     final header = BubblegumMessageBarSlot(
         slot: slot, showBadgesWhenEmpty: false, messages: messages);

@@ -28,7 +28,7 @@ class BubblegumMessageBadgeWidget extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 4),
       padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
       decoration: BoxDecoration(
-        color: BubblegumMessageSlotTheme.getBadgeColor(themeData, level),
+        color: BubblegumMessageSlotTheme.getLevelColor(themeData, level),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Text('$count'),
