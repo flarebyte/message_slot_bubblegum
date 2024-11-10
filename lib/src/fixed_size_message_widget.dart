@@ -35,15 +35,16 @@ class BubblegumFixedSizeMessageWidget extends StatelessWidget {
     final messageTiles = limitedMessages
         .map((msg) => ListTile(
             title: Text(msg.label, textAlign: TextAlign.justify),
-            leading: Chip(
-              side: BorderSide.none,
-              label: Text(msg.level.name.toUpperCase(),
+            leading: Column(children: [
+              Text(msg.level.name.toUpperCase(),
+                  textAlign: TextAlign.left,
                   style: TextStyle(
                       fontSize: 8,
                       fontWeight: FontWeight.bold,
                       color: BubblegumMessageSlotTheme.getLevelColor(
                           themeData, msg.level))),
-            )))
+              const Text('Cool')
+            ])))
         .toList();
     final header = BubblegumMessageBarSlot(
         slot: slot, showBadgesWhenEmpty: false, messages: messages);
