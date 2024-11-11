@@ -27,11 +27,25 @@ class BubblegumIconCollection {
     iconKeySet = BubblegumPriorityKeyHelpers.iconsToKeys(icons);
   }
 
-  List<BubblegumIconInfo> findIcons(CopperframeMessage message) {
-    final Set<String> passedKeys =BubblegumPriorityKeyHelpers.messageToKeys(message);
-    final availableKeys = iconKeySet.intersection(passedKeys);
+  BubblegumIconInfo? findIconByKey(String key) {
+    return icons.firstWhere((icon) => icon.key == key);
+  }
 
-    return [];
+  List<BubblegumIconInfo> findIcons(CopperframeMessage message) {
+    final Set<String> passedKeys =
+        BubblegumPriorityKeyHelpers.messageToKeys(message);
+    final availableKeys = iconKeySet.intersection(passedKeys);
+    final List<String> givenPriorityKeys =
+        priorityKeys.where((key) => availableKeys.contains(key)).toList();
+    final remainingKeys =
+        availableKeys.intersection(Set.from(givenPriorityKeys)).toList();
+    final acceptableKeys =
+        [...givenPriorityKeys, ...remainingKeys].take(maxIcons).toList();
+    final results = acceptableKeys
+        .map((key) => findIconByKey(key))
+        .whereType<BubblegumIconInfo>()
+        .toList();
+    return results;
   }
 }
 
@@ -43,8 +57,9 @@ class BubblegumPriorityKeyHelpers {
   static Set<String> messageToKeys<C>(CopperframeMessage message) {
     final Set<String> passedKeys = {message.level.name, message.category};
     if (message.flags != null) {
-      passedKeys
-          .addAll(BubblegumPriorityKeyHelpers.flagsToKeys(message.flags ?? '', prefixSeparator: ':'));
+      passedKeys.addAll(BubblegumPriorityKeyHelpers.flagsToKeys(
+          message.flags ?? '',
+          prefixSeparator: ':'));
     }
     return passedKeys;
   }
