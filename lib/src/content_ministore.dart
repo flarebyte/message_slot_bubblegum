@@ -16,10 +16,27 @@ class BubblegumContentMinistore<C> {
       required this.maxItems,
       required this.priorityKeys,
       this.defaultContent});
+
+  findContentByFlags(String flags) {}
 }
 
 class BubblegumPriorityKeyHelpers {
   static Set<String> contentKeys<C>(List<BubblegumContentItem<C>> items) {
     return items.map((item) => item.key).toSet();
+  }
+
+  static String extractPrefix(String text, String prefixSeparator) =>
+      text.contains(prefixSeparator)
+          ? text.split(prefixSeparator)[0].trim()
+          : text.trim();
+
+  static Set<String> flagsToKeys<C>(String flags,
+      {String separator = ' ', String? prefixSeparator}) {
+    return flags
+        .split(separator)
+        .map((flag) => prefixSeparator == null
+            ? flag.trim()
+            : extractPrefix(flag, prefixSeparator))
+        .toSet();
   }
 }
