@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:grand_copperframe/grand_copperframe.dart';
 import 'package:slotboard_copperframe/slotboard_copperframe.dart';
 
+import 'icon_collection.dart';
 import 'message_bar_slot.dart';
 import 'message_helper.dart';
 import 'message_slot_theme.dart';
@@ -15,6 +16,7 @@ class BubblegumFixedSizeMessageWidget extends StatelessWidget {
     required this.messageLimits,
     required this.slot,
     required this.maxMessages,
+    required this.iconCollection,
   });
 
   final bool groupMessagesByLevel;
@@ -22,6 +24,7 @@ class BubblegumFixedSizeMessageWidget extends StatelessWidget {
   final Map<String, int> messageLimits;
   final CopperframeSlotBase slot;
   final int maxMessages;
+  final BubblegumIconCollection iconCollection;
 
   @override
   Widget build(BuildContext context) {
@@ -36,12 +39,15 @@ class BubblegumFixedSizeMessageWidget extends StatelessWidget {
         .map((msg) => ListTile(
             title: Text(msg.label, textAlign: TextAlign.justify),
             leading: Column(children: [
-              MessageLevelIcon(level: msg.level),
+              MessageLevelIcon(level: msg.level, iconCollection: iconCollection),
               const Icon(Icons.access_alarm)
             ])))
         .toList();
     final header = BubblegumMessageBarSlot(
-        slot: slot, showBadgesWhenEmpty: false, messages: messages);
+        slot: slot,
+        showBadgesWhenEmpty: false,
+        messages: messages,
+        iconCollection: iconCollection);
     final dividerHeader = Divider(
         color: BubblegumMessageSlotTheme.colorOfHeaderDivider(themeData));
     final toContinue = isAboveLimit

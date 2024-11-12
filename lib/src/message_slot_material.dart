@@ -4,6 +4,7 @@ import 'package:message_slot_bubblegum/src/message_bar_slot.dart';
 import 'package:slotboard_copperframe/slotboard_copperframe.dart';
 
 import 'fixed_size_message_widget.dart';
+import 'icon_collection.dart';
 import 'message_slot_theme.dart';
 
 class BubblegumMessageSlot extends StatelessWidget {
@@ -12,11 +13,13 @@ class BubblegumMessageSlot extends StatelessWidget {
   final bool showBadgesWhenEmpty;
   final Map<String, int> messageLimits; // Configure message count per size.
   final bool groupMessagesByLevel;
+  final BubblegumIconCollection iconCollection;
 
   const BubblegumMessageSlot({
     Key? key,
     required this.slot,
     required this.messages,
+    required this.iconCollection,
     this.showBadgesWhenEmpty = true,
     this.messageLimits = const {
       'bar': 0,
@@ -62,11 +65,13 @@ class BubblegumMessageSlot extends StatelessWidget {
         return BubblegumMessageBarSlot(
             slot: slot,
             showBadgesWhenEmpty: showBadgesWhenEmpty,
-            messages: messages);
+            messages: messages,
+            iconCollection: iconCollection);
       case 'small':
         return BubblegumFixedSizeMessageWidget(
             groupMessagesByLevel: groupMessagesByLevel,
             messages: messages,
+            iconCollection: iconCollection,
             messageLimits: messageLimits,
             slot: slot,
             maxMessages: 2);
@@ -74,6 +79,7 @@ class BubblegumMessageSlot extends StatelessWidget {
         return BubblegumFixedSizeMessageWidget(
             groupMessagesByLevel: groupMessagesByLevel,
             messages: messages,
+            iconCollection: iconCollection,
             messageLimits: messageLimits,
             slot: slot,
             maxMessages: 5);
@@ -81,6 +87,7 @@ class BubblegumMessageSlot extends StatelessWidget {
         return BubblegumFixedSizeMessageWidget(
             groupMessagesByLevel: groupMessagesByLevel,
             messages: messages,
+            iconCollection: iconCollection,
             messageLimits: messageLimits,
             slot: slot,
             maxMessages: 8);
@@ -88,7 +95,8 @@ class BubblegumMessageSlot extends StatelessWidget {
         return BubblegumMessageBarSlot(
             slot: slot,
             showBadgesWhenEmpty: showBadgesWhenEmpty,
-            messages: messages);
+            messages: messages,
+            iconCollection: iconCollection);
     }
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grand_copperframe/grand_copperframe.dart';
 
+import 'icon_collection.dart';
 import 'message_slot_theme.dart';
 
 class BubblegumMessageWidget extends StatelessWidget {
@@ -25,9 +26,12 @@ class MessageLevelIcon extends StatelessWidget {
   const MessageLevelIcon({
     super.key,
     required this.level,
+    required this.iconCollection,
   });
 
   final CopperframeMessageLevel level;
+  final BubblegumIconCollection iconCollection;
+
 
   @override
   Widget build(BuildContext context) {

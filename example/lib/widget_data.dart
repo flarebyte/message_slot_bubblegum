@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:grand_copperframe/grand_copperframe.dart';
 import 'package:slotboard_copperframe/slotboard_copperframe.dart';
+import 'package:message_slot_bubblegum/message_slot_bubblegum.dart';
+
 import 'circular_parameter_list.dart';
 import 'multi_circular_iterator.dart';
+
 
 class InfoSlot extends CopperframeSlotBase {
   InfoSlot({required super.tags});
@@ -94,4 +97,10 @@ class WidgetThemeData {
         ));
     themeData.addParameter('Dark', ThemeData.dark(useMaterial3: true));
   }
+}
+
+class IconRepo {
+
+  static BubblegumIconCollection iconCollection
+
 }
