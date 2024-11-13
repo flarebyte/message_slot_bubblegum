@@ -39,7 +39,8 @@ class BubblegumFixedSizeMessageWidget extends StatelessWidget {
         .map((msg) => ListTile(
             title: Text(msg.label, textAlign: TextAlign.justify),
             leading: Column(children: [
-              MessageLevelIcon(level: msg.level, iconCollection: iconCollection),
+              MessageLevelIcon(
+                  level: msg.level, iconCollection: iconCollection),
               const Icon(Icons.access_alarm)
             ])))
         .toList();

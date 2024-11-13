@@ -63,8 +63,7 @@ class _MyAppState extends State<MyApp> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              CircularParameterWidget(
-                  title: 'Theme', parameterList: themeData),
+              CircularParameterWidget(title: 'Theme', parameterList: themeData),
               CircularParameterWidget(
                   title: 'Size', parameterList: loopData.size),
               CircularParameterWidget(
@@ -76,8 +75,10 @@ class _MyAppState extends State<MyApp> {
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
               BubblegumMessageSlot(
-                  slot: _infoSlot,
-                  messages: loopData.slotMessages.current().value),
+                slot: _infoSlot,
+                messages: loopData.slotMessages.current().value,
+                iconCollection: IconRepo.iconCollection,
+              ),
             ],
           ),
         ),

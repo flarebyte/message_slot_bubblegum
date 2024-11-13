@@ -6,7 +6,6 @@ import 'package:message_slot_bubblegum/message_slot_bubblegum.dart';
 import 'circular_parameter_list.dart';
 import 'multi_circular_iterator.dart';
 
-
 class InfoSlot extends CopperframeSlotBase {
   InfoSlot({required super.tags});
 }
@@ -65,19 +64,25 @@ class MessageRepo {
       level: CopperframeMessageLevel.info,
       category: 'privacy');
   static final warning = CopperframeMessage(
-      label: 'Warning Lorem ipsum dolor 😈 sit amet, consectetur adipiscing elit. Proin non lorem sit amet tellus semper vestibulum.',
+      label:
+          'Warning Lorem ipsum dolor 😈 sit amet, consectetur adipiscing elit. Proin non lorem sit amet tellus semper vestibulum.',
       level: CopperframeMessageLevel.warning,
       category: 'validation');
   static final otherWarning = CopperframeMessage(
-      label: 'Other warning Cras sit amet purus aliquam lacus finibus fringilla. Donec nulla odio, gravida quis eros ac, consectetur feugiat est.',
+      label:
+          'Other warning Cras sit amet purus aliquam lacus finibus fringilla. Donec nulla odio, gravida quis eros ac, consectetur feugiat est.',
       level: CopperframeMessageLevel.warning,
       category: 'validation');
   static final error = CopperframeMessage(
-      label: 'Some error Cras sit amet purus aliquam lacus finibus fringilla. Donec nulla odio, gravida quis eros ac, consectetur feugiat est.',
+      label:
+          'Some error Cras sit amet purus aliquam lacus finibus fringilla. Donec nulla odio, gravida quis eros ac, consectetur feugiat est.',
       level: CopperframeMessageLevel.error,
       category: 'server');
   static final otherError = CopperframeMessage(
-      label: 'Other error Cras sit amet purus aliquam lacus finibus fringilla. Donec nulla odio, gravida quis eros ac, consectetur feugiat est.', level: CopperframeMessageLevel.error, category: '');
+      label:
+          'Other error Cras sit amet purus aliquam lacus finibus fringilla. Donec nulla odio, gravida quis eros ac, consectetur feugiat est.',
+      level: CopperframeMessageLevel.error,
+      category: '');
 }
 
 class WidgetThemeData {
@@ -100,7 +105,25 @@ class WidgetThemeData {
 }
 
 class IconRepo {
-
-  static BubblegumIconCollection iconCollection
-
+  static final BubblegumIconInfo placeholder = BubblegumIconInfo(
+      key: 'placeholder',
+      icon: const Icon(Icons.info),
+      color: Colors.grey.shade100);
+  static final BubblegumIconInfo info = BubblegumIconInfo(
+      key: 'info', icon: const Icon(Icons.info), color: Colors.blue.shade600);
+  static final BubblegumIconInfo warning = BubblegumIconInfo(
+      key: 'warning',
+      icon: const Icon(Icons.warning),
+      color: Colors.orange.shade600);
+  static final BubblegumIconInfo error = BubblegumIconInfo(
+      key: 'error', icon: const Icon(Icons.error), color: Colors.red.shade600);
+  static final BubblegumIconInfo fix = BubblegumIconInfo(
+      key: 'fix', icon: const Icon(Icons.info), color: Colors.purple.shade600);
+  static final BubblegumIconInfo help = BubblegumIconInfo(
+      key: 'help', icon: const Icon(Icons.help), color: Colors.blue.shade600);
+  static BubblegumIconCollection iconCollection = BubblegumIconCollection(
+      defaultContent: placeholder,
+      icons: [info, warning, error, fix, help],
+      maxIcons: 3,
+      priorityKeys: [error.key, warning.key, info.key, fix.key]);
 }

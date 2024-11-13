@@ -32,7 +32,6 @@ class MessageLevelIcon extends StatelessWidget {
   final CopperframeMessageLevel level;
   final BubblegumIconCollection iconCollection;
 
-
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
