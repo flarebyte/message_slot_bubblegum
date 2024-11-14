@@ -106,24 +106,30 @@ class WidgetThemeData {
 
 class IconRepo {
   static final BubblegumIconInfo placeholder = BubblegumIconInfo(
-      key: 'placeholder',
-      icon: const Icon(Icons.info),
-      color: Colors.grey.shade100);
+      key: 'placeholder', icon: Icon(Icons.info, color: Colors.grey.shade100));
   static final BubblegumIconInfo info = BubblegumIconInfo(
-      key: 'info', icon: const Icon(Icons.info), color: Colors.blue.shade600);
+      key: 'info', icon: Icon(Icons.info, color: Colors.blue.shade600));
   static final BubblegumIconInfo warning = BubblegumIconInfo(
-      key: 'warning',
-      icon: const Icon(Icons.warning),
-      color: Colors.orange.shade600);
+    key: 'warning',
+    icon: Icon(Icons.warning, color: Colors.orange.shade600),
+  );
   static final BubblegumIconInfo error = BubblegumIconInfo(
-      key: 'error', icon: const Icon(Icons.error), color: Colors.red.shade600);
+      key: 'error', icon: Icon(Icons.error, color: Colors.red.shade600));
   static final BubblegumIconInfo fix = BubblegumIconInfo(
-      key: 'fix', icon: const Icon(Icons.info), color: Colors.purple.shade600);
+      key: 'fix', icon: Icon(Icons.info, color: Colors.purple.shade600));
   static final BubblegumIconInfo help = BubblegumIconInfo(
-      key: 'help', icon: const Icon(Icons.help), color: Colors.blue.shade600);
+      key: 'help', icon: Icon(Icons.help, color: Colors.blue.shade600));
+  static final BubblegumIconInfo spellcheck = BubblegumIconInfo(
+      key: 'spellcheck',
+      icon: Icon(Icons.spellcheck, color: Colors.blue.shade600));
+  static final BubblegumIconInfo privacy = BubblegumIconInfo(
+      key: 'privacy',
+      icon: Icon(Icons.privacy_tip, color: Colors.blue.shade600));
+  static final BubblegumIconInfo validation = BubblegumIconInfo(
+      key: 'validation', icon: Icon(Icons.check, color: Colors.blue.shade600));
   static BubblegumIconCollection iconCollection = BubblegumIconCollection(
       defaultContent: placeholder,
-      icons: [info, warning, error, fix, help],
+      icons: [info, warning, error, fix, help, spellcheck, privacy, validation],
       maxIcons: 3,
       priorityKeys: [error.key, warning.key, info.key, fix.key]);
 }

@@ -28,20 +28,6 @@ class BubblegumMessageSlotTheme {
     }
   }
 
-  static Color getLevelColor(
-      ThemeData themeData, CopperframeMessageLevel level) {
-    switch (level) {
-      case CopperframeMessageLevel.error:
-        return Colors.red.shade600;
-      case CopperframeMessageLevel.warning:
-        return Colors.orange.shade600;
-      case CopperframeMessageLevel.info:
-        return Colors.blue.shade600;
-      default:
-        return Colors.grey.shade600;
-    }
-  }
-
   static BoxDecoration getSlotBoxDecoration(
       {required ThemeData themeData, required TShirtSize shirtSize}) {
     return BoxDecoration(

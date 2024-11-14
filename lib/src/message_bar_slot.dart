@@ -31,7 +31,9 @@ class BubblegumMessageBarSlot extends StatelessWidget {
         const SizedBox(width: 8),
         if (showBadgesWhenEmpty || messages.isNotEmpty)
           BubblegumLevelBadgeWidget(
-              messages: messages, showBadgesWhenEmpty: showBadgesWhenEmpty),
+              messages: messages,
+              showBadgesWhenEmpty: showBadgesWhenEmpty,
+              iconCollection: iconCollection),
       ],
     );
   }

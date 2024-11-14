@@ -4,9 +4,8 @@ import 'package:grand_copperframe/grand_copperframe.dart';
 class BubblegumIconInfo {
   final String key;
   final Icon icon;
-  final Color? color;
 
-  BubblegumIconInfo({required this.key, required this.icon, this.color});
+  BubblegumIconInfo({required this.key, required this.icon});
 }
 
 class BubblegumIconCollection {
@@ -29,6 +28,10 @@ class BubblegumIconCollection {
 
   BubblegumIconInfo? findIconByKey(String key) {
     return icons.firstWhere((icon) => icon.key == key);
+  }
+
+  BubblegumIconInfo findIconByKeyOrDefault(String key) {
+    return findIconByKey(key) ?? defaultContent;
   }
 
   List<BubblegumIconInfo> findIcons(CopperframeMessage message) {

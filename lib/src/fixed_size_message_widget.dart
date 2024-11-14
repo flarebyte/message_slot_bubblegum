@@ -6,7 +6,6 @@ import 'icon_collection.dart';
 import 'message_bar_slot.dart';
 import 'message_helper.dart';
 import 'message_slot_theme.dart';
-import 'message_widget.dart';
 
 class BubblegumFixedSizeMessageWidget extends StatelessWidget {
   const BubblegumFixedSizeMessageWidget({
@@ -38,11 +37,11 @@ class BubblegumFixedSizeMessageWidget extends StatelessWidget {
     final messageTiles = limitedMessages
         .map((msg) => ListTile(
             title: Text(msg.label, textAlign: TextAlign.justify),
-            leading: Column(children: [
-              MessageLevelIcon(
-                  level: msg.level, iconCollection: iconCollection),
-              const Icon(Icons.access_alarm)
-            ])))
+            leading: Column(
+                children: iconCollection
+                    .findIcons(msg)
+                    .map((ico) => ico.icon)
+                    .toList())))
         .toList();
     final header = BubblegumMessageBarSlot(
         slot: slot,
