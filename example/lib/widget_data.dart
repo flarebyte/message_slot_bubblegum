@@ -131,5 +131,5 @@ class IconRepo {
       defaultContent: placeholder,
       icons: [info, warning, error, fix, help, spellcheck, privacy, validation],
       maxIcons: 2,
-      priorityKeys: [error.key, warning.key, info.key, fix.key]);
+      priorityKeys: [error.key, warning.key, fix.key]);
 }
