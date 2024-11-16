@@ -9,13 +9,11 @@ class BubblegumMessageBarSlot extends StatelessWidget {
   const BubblegumMessageBarSlot({
     super.key,
     required this.slot,
-    required this.showBadgesWhenEmpty,
     required this.messages,
     required this.iconCollection,
   });
 
   final CopperframeSlotBase slot;
-  final bool showBadgesWhenEmpty;
   final List<CopperframeMessage> messages;
   final BubblegumIconCollection iconCollection;
 
@@ -30,11 +28,9 @@ class BubblegumMessageBarSlot extends StatelessWidget {
                 style: const TextStyle(fontWeight: FontWeight.bold))),
         const Spacer(),
         const SizedBox(width: 8),
-        if (showBadgesWhenEmpty || messages.isNotEmpty)
+        if (messages.isNotEmpty)
           BubblegumLevelBadgeWidget(
-              messages: messages,
-              showBadgesWhenEmpty: showBadgesWhenEmpty,
-              iconCollection: iconCollection),
+              messages: messages, iconCollection: iconCollection),
       ],
     );
   }

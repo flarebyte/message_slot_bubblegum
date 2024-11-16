@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:grand_copperframe/grand_copperframe.dart';
 
 enum TShirtSize { extraSmall, small, medium, large, extraLarge }
 

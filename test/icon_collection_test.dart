@@ -101,7 +101,7 @@ void main() {
     });
 
     test('flagsToKeys splits flags correctly', () {
-      final flags = 'flag1 flag2:extra';
+      const flags = 'flag1 flag2:extra';
       final keys =
           BubblegumPriorityKeyHelpers.flagsToKeys(flags, prefixSeparator: ':');
 

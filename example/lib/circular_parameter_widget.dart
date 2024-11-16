@@ -8,7 +8,7 @@ class CircularParameterWidget<T> extends StatelessWidget {
   final String title;
   final CircularParameterList<T> parameterList;
 
-  CircularParameterWidget({required this.title, required this.parameterList});
+  const CircularParameterWidget({super.key, required this.title, required this.parameterList});
 
   @override
   Widget build(BuildContext context) {

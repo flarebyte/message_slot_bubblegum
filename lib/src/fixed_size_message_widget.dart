@@ -46,10 +46,7 @@ class BubblegumFixedSizeMessageWidget extends StatelessWidget {
                     .toList())))
         .toList();
     final header = BubblegumMessageBarSlot(
-        slot: slot,
-        showBadgesWhenEmpty: false,
-        messages: messages,
-        iconCollection: iconCollection);
+        slot: slot, messages: messages, iconCollection: iconCollection);
     final dividerHeader = Divider(
         color: BubblegumMessageSlotTheme.colorOfHeaderDivider(themeData));
     final toContinue = isAboveLimit

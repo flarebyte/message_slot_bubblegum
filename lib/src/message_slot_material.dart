@@ -10,17 +10,15 @@ import 'message_slot_theme.dart';
 class BubblegumMessageSlot extends StatelessWidget {
   final CopperframeSlotBase slot;
   final List<CopperframeMessage> messages;
-  final bool showBadgesWhenEmpty;
   final Map<String, int> messageLimits; // Configure message count per size.
   final bool groupMessagesByLevel;
   final BubblegumIconCollection iconCollection;
 
   const BubblegumMessageSlot({
-    Key? key,
+    super.key,
     required this.slot,
     required this.messages,
     required this.iconCollection,
-    this.showBadgesWhenEmpty = true,
     this.messageLimits = const {
       'bar': 0,
       'small': 2,
@@ -28,7 +26,7 @@ class BubblegumMessageSlot extends StatelessWidget {
       'large': 8,
     },
     this.groupMessagesByLevel = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -63,10 +61,7 @@ class BubblegumMessageSlot extends StatelessWidget {
     switch (slot.size) {
       case 'bar':
         return BubblegumMessageBarSlot(
-            slot: slot,
-            showBadgesWhenEmpty: showBadgesWhenEmpty,
-            messages: messages,
-            iconCollection: iconCollection);
+            slot: slot, messages: messages, iconCollection: iconCollection);
       case 'small':
         return BubblegumFixedSizeMessageWidget(
             groupMessagesByLevel: groupMessagesByLevel,
@@ -93,10 +88,7 @@ class BubblegumMessageSlot extends StatelessWidget {
             maxMessages: 8);
       default:
         return BubblegumMessageBarSlot(
-            slot: slot,
-            showBadgesWhenEmpty: showBadgesWhenEmpty,
-            messages: messages,
-            iconCollection: iconCollection);
+            slot: slot, messages: messages, iconCollection: iconCollection);
     }
   }
 }
