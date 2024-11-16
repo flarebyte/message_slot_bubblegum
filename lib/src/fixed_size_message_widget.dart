@@ -4,6 +4,7 @@ import 'package:slotboard_copperframe/slotboard_copperframe.dart';
 
 import 'icon_collection.dart';
 import 'message_bar_slot.dart';
+import 'message_callback.dart';
 import 'message_helper.dart';
 import 'message_slot_theme.dart';
 
@@ -16,6 +17,8 @@ class BubblegumFixedSizeMessageWidget extends StatelessWidget {
     required this.slot,
     required this.maxMessages,
     required this.iconCollection,
+    this.onMessageTap,
+    this.onMessageLongPress,
   });
 
   final bool groupMessagesByLevel;
@@ -24,6 +27,8 @@ class BubblegumFixedSizeMessageWidget extends StatelessWidget {
   final CopperframeSlotBase slot;
   final int maxMessages;
   final BubblegumIconCollection iconCollection;
+  final OnMessageAction? onMessageTap;
+  final OnMessageAction? onMessageLongPress;
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +44,9 @@ class BubblegumFixedSizeMessageWidget extends StatelessWidget {
     final messageTiles = limitedMessages
         .map((msg) => ListTile(
             title: Text(msg.label, textAlign: TextAlign.justify),
+            onTap: (onMessageTap != null) ? () => onMessageTap!(msg) : null,
+            onLongPress:
+                (onMessageTap != null) ? () => onMessageLongPress!(msg) : null,
             leading: Column(
                 children: iconCollection
                     .findIcons(msg)

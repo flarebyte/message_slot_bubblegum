@@ -5,6 +5,7 @@ import 'package:slotboard_copperframe/slotboard_copperframe.dart';
 
 import 'fixed_size_message_widget.dart';
 import 'icon_collection.dart';
+import 'message_callback.dart';
 import 'message_slot_theme.dart';
 
 class BubblegumMessageSlot extends StatelessWidget {
@@ -13,20 +14,23 @@ class BubblegumMessageSlot extends StatelessWidget {
   final Map<String, int> messageLimits; // Configure message count per size.
   final bool groupMessagesByLevel;
   final BubblegumIconCollection iconCollection;
+  final OnMessageAction? onMessageTap;
+  final OnMessageAction? onMessageLongPress;
 
-  const BubblegumMessageSlot({
-    super.key,
-    required this.slot,
-    required this.messages,
-    required this.iconCollection,
-    this.messageLimits = const {
-      'bar': 0,
-      'small': 2,
-      'medium': 5,
-      'large': 8,
-    },
-    this.groupMessagesByLevel = false,
-  });
+  const BubblegumMessageSlot(
+      {super.key,
+      required this.slot,
+      required this.messages,
+      required this.iconCollection,
+      this.messageLimits = const {
+        'bar': 0,
+        'small': 2,
+        'medium': 5,
+        'large': 8,
+      },
+      this.groupMessagesByLevel = false,
+      this.onMessageTap,
+      this.onMessageLongPress});
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +73,9 @@ class BubblegumMessageSlot extends StatelessWidget {
             iconCollection: iconCollection,
             messageLimits: messageLimits,
             slot: slot,
-            maxMessages: 2);
+            maxMessages: 2,
+            onMessageTap: onMessageTap,
+            onMessageLongPress: onMessageLongPress);
       case 'medium':
         return BubblegumFixedSizeMessageWidget(
             groupMessagesByLevel: groupMessagesByLevel,
@@ -77,7 +83,9 @@ class BubblegumMessageSlot extends StatelessWidget {
             iconCollection: iconCollection,
             messageLimits: messageLimits,
             slot: slot,
-            maxMessages: 5);
+            maxMessages: 5,
+            onMessageTap: onMessageTap,
+            onMessageLongPress: onMessageLongPress);
       case 'large':
         return BubblegumFixedSizeMessageWidget(
             groupMessagesByLevel: groupMessagesByLevel,
@@ -85,7 +93,9 @@ class BubblegumMessageSlot extends StatelessWidget {
             iconCollection: iconCollection,
             messageLimits: messageLimits,
             slot: slot,
-            maxMessages: 8);
+            maxMessages: 8,
+            onMessageTap: onMessageTap,
+            onMessageLongPress: onMessageLongPress);
       default:
         return BubblegumMessageBarSlot(
             slot: slot, messages: messages, iconCollection: iconCollection);

@@ -36,6 +36,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'BubblegumMessageSlot',
       theme: themeData.current().value,
+      showSemanticsDebugger: false,
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -78,6 +79,7 @@ class _MyAppState extends State<MyApp> {
                 slot: _infoSlot,
                 messages: loopData.slotMessages.current().value,
                 iconCollection: IconRepo.iconCollection,
+                  groupMessagesByLevel: true,
               ),
             ],
           ),
