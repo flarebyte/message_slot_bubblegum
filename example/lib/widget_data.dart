@@ -108,13 +108,13 @@ class IconRepo {
   static final BubblegumIconInfo placeholder = BubblegumIconInfo(
       key: 'placeholder', icon: Icon(Icons.info, color: Colors.grey.shade100));
   static final BubblegumIconInfo info = BubblegumIconInfo(
-      key: 'info', icon: Icon(Icons.info, color: Colors.blue.shade600));
+      key: 'info', icon: Icon(Icons.info, color: Colors.blue.shade600, semanticLabel: 'info',));
   static final BubblegumIconInfo warning = BubblegumIconInfo(
     key: 'warning',
-    icon: Icon(Icons.warning, color: Colors.orange.shade600),
+    icon: Icon(Icons.warning, color: Colors.orange.shade600, semanticLabel: 'warning'),
   );
   static final BubblegumIconInfo error = BubblegumIconInfo(
-      key: 'error', icon: Icon(Icons.error, color: Colors.red.shade600));
+      key: 'error', icon: Icon(Icons.error, color: Colors.red.shade600, semanticLabel: 'error',));
   static final BubblegumIconInfo fix = BubblegumIconInfo(
       key: 'fix', icon: Icon(Icons.info, color: Colors.purple.shade600));
   static final BubblegumIconInfo help = BubblegumIconInfo(

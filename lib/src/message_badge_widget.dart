@@ -20,6 +20,7 @@ class BubblegumLevelBadgeWidget extends StatelessWidget {
     return Badge.count(
       count: messages.length,
       child: Icon(Icons.notifications,
+          semanticLabel: '${messages.length} notifications',
           color: iconCollection
               .findIconByKeyOrDefault(highestLevel.name)
               .icon
