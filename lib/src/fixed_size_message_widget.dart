@@ -31,8 +31,10 @@ class BubblegumFixedSizeMessageWidget extends StatelessWidget {
     final List<CopperframeMessage> displayedMessages = groupMessagesByLevel
         ? BubblegumMessageHelper.groupMessages(messages)
         : messages;
-    final int limit = messageLimits[slot.size] ?? maxMessages;
-    final limitedMessages = displayedMessages.take(limit).toList();
+    List<CopperframeMessage> limitedMessages =
+        BubblegumMessageHelper.limitMessages(displayedMessages,
+            maxMessages: maxMessages,
+            slotMaxMessages: messageLimits[slot.size]);
     final isAboveLimit = displayedMessages.length > limitedMessages.length;
     final messageTiles = limitedMessages
         .map((msg) => ListTile(

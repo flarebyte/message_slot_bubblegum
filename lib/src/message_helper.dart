@@ -19,4 +19,24 @@ class BubblegumMessageHelper {
       List<CopperframeMessage> messages, CopperframeMessageLevel level) {
     return messages.where((msg) => msg.level == level).length;
   }
+
+  static CopperframeMessageLevel getHighestLevel(
+      List<CopperframeMessage> messages) {
+    if (getMessageCountByLevel(messages, CopperframeMessageLevel.error) > 0) {
+      return CopperframeMessageLevel.error;
+    }
+    if (getMessageCountByLevel(messages, CopperframeMessageLevel.warning) > 0) {
+      return CopperframeMessageLevel.warning;
+    }
+    return CopperframeMessageLevel.info;
+  }
+
+  static List<CopperframeMessage> limitMessages(
+      List<CopperframeMessage> displayedMessages,
+      {required int maxMessages,
+      int? slotMaxMessages}) {
+    final int limit = slotMaxMessages ?? maxMessages;
+    final limitedMessages = displayedMessages.take(limit).toList();
+    return limitedMessages;
+  }
 }
