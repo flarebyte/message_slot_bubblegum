@@ -24,10 +24,11 @@ class BubblegumMessageBarSlot extends StatelessWidget {
     return Row(
       children: [
         const SizedBox(width: 8),
-        Text(slot.title.toUpperCase(),
-            style: const TextStyle(fontWeight: FontWeight.bold)),
+        Tooltip(
+            message: slot.description,
+            child: Text(slot.title.toUpperCase(),
+                style: const TextStyle(fontWeight: FontWeight.bold))),
         const Spacer(),
-        Tooltip(message: slot.description, child: const Icon(Icons.help)),
         const SizedBox(width: 8),
         if (showBadgesWhenEmpty || messages.isNotEmpty)
           BubblegumLevelBadgeWidget(

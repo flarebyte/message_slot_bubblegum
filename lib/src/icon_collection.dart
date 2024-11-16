@@ -11,6 +11,22 @@ class BubblegumIconInfo {
   final Icon icon;
 
   BubblegumIconInfo({required this.key, required this.icon});
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is BubblegumIconInfo &&
+          runtimeType == other.runtimeType &&
+          key == other.key &&
+          icon == other.icon;
+
+  @override
+  int get hashCode => key.hashCode ^ icon.hashCode;
+
+  @override
+  String toString() {
+    return 'BubblegumIconInfo{key: $key}';
+  }
 }
 
 /// The `BubblegumIconCollection` class manages a collection of `BubblegumIconInfo` objects.
@@ -55,15 +71,8 @@ class BubblegumIconCollection {
     iconKeySet = BubblegumPriorityKeyHelpers.iconsToKeys(icons);
   }
 
-  /// Finds an icon in the collection by its key.
-  ///
-  /// Parameters:
-  /// - `key` (String): The key of the icon to be found.
-  ///
-  /// Returns:
-  /// - `BubblegumIconInfo?`: The icon if found, otherwise `null`.
-  BubblegumIconInfo? findIconByKey(String key) {
-    return icons.firstWhere((icon) => icon.key == key);
+  bool hasIconWithKey(String key) {
+    return iconKeySet.contains(key);
   }
 
   /// Finds an icon by its key or returns the default icon if not found.
@@ -74,7 +83,9 @@ class BubblegumIconCollection {
   /// Returns:
   /// - `BubblegumIconInfo`: The matching icon or `defaultContent` if no match is found.
   BubblegumIconInfo findIconByKeyOrDefault(String key) {
-    return findIconByKey(key) ?? defaultContent;
+    return hasIconWithKey(key)
+        ? icons.firstWhere((icon) => icon.key == key)
+        : defaultContent;
   }
 
   /// Finds icons based on the given `CopperframeMessage`.
@@ -92,13 +103,11 @@ class BubblegumIconCollection {
     final List<String> givenPriorityKeys =
         priorityKeys.where((key) => availableKeys.contains(key)).toList();
     final remainingKeys =
-        availableKeys.intersection(Set.from(givenPriorityKeys)).toList();
+        availableKeys.difference(Set.from(givenPriorityKeys)).toList();
     final acceptableKeys =
         [...givenPriorityKeys, ...remainingKeys].take(maxIcons).toList();
-    final results = acceptableKeys
-        .map((key) => findIconByKey(key))
-        .whereType<BubblegumIconInfo>()
-        .toList();
+    final results =
+        acceptableKeys.map((key) => findIconByKeyOrDefault(key)).toList();
     return results;
   }
 }

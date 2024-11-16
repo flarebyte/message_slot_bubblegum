@@ -8,28 +8,16 @@ void main() {
   group('BubblegumIconCollection', () {
     final defaultIcon =
         BubblegumIconInfo(key: 'default', icon: const Icon(Icons.error));
+    final info = BubblegumIconInfo(key: 'info', icon: const Icon(Icons.info));
     final icon1 = BubblegumIconInfo(key: 'icon1', icon: const Icon(Icons.star));
     final icon2 =
         BubblegumIconInfo(key: 'icon2', icon: const Icon(Icons.access_alarm));
     final icon3 =
         BubblegumIconInfo(key: 'icon3', icon: const Icon(Icons.accessibility));
 
-    test('findIconByKey returns the correct icon', () {
-      final collection = BubblegumIconCollection(
-        icons: [icon1, icon2, icon3],
-        maxIcons: 3,
-        priorityKeys: [],
-        defaultContent: defaultIcon,
-      );
-
-      expect(collection.findIconByKey('icon1'), equals(icon1));
-      expect(collection.findIconByKey('icon2'), equals(icon2));
-      expect(collection.findIconByKey('nonexistent'), isNull);
-    });
-
     test('findIconByKeyOrDefault returns the correct icon or default', () {
       final collection = BubblegumIconCollection(
-        icons: [icon1, icon2, icon3],
+        icons: [icon1, icon2, icon3, info],
         maxIcons: 3,
         priorityKeys: [],
         defaultContent: defaultIcon,
@@ -45,15 +33,16 @@ void main() {
           label: 'Some message',
           level: CopperframeMessageLevel.info,
           category: 'general',
-          flags: null);
+          flags: 'icon1 icon2 icon3');
       final collection = BubblegumIconCollection(
-        icons: [icon1, icon2, icon3],
+        icons: [icon1, icon2, icon3, info],
         maxIcons: 2,
         priorityKeys: [],
         defaultContent: defaultIcon,
       );
 
       final result = collection.findIcons(message);
+      expect(result.length, greaterThan(0));
       expect(result.length, lessThanOrEqualTo(2));
     });
 
@@ -62,9 +51,9 @@ void main() {
           label: 'Some message',
           level: CopperframeMessageLevel.info,
           category: 'general',
-          flags: 'priority');
+          flags: 'icon1 icon3');
       final collection = BubblegumIconCollection(
-        icons: [icon1, icon2, icon3],
+        icons: [icon1, icon2, icon3, info],
         maxIcons: 3,
         priorityKeys: ['icon3', 'icon1'],
         defaultContent: defaultIcon,
@@ -73,6 +62,24 @@ void main() {
       final result = collection.findIcons(message);
       expect(result, contains(icon3));
       expect(result.first, equals(icon3));
+    });
+
+    test('findIcons should not return duplicates', () {
+      final message = CopperframeMessage(
+          label: 'Some message',
+          level: CopperframeMessageLevel.info,
+          category: 'info',
+          flags: 'info');
+      final collection = BubblegumIconCollection(
+        icons: [icon1, icon2, icon3, info],
+        maxIcons: 3,
+        priorityKeys: ['icon3', 'icon1'],
+        defaultContent: defaultIcon,
+      );
+
+      final result = collection.findIcons(message);
+      expect(result, contains(info));
+      expect(result.length, 1);
     });
   });
 

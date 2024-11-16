@@ -35,7 +35,7 @@ class IterationData {
       MessageRepo.warning,
       MessageRepo.info,
       MessageRepo.warning,
-    ]);
+    ]).addParameter('(0)', []);
     prominence = CircularParameterList<String>(label: 'Low', value: 'low')
         .addParameter('Medium', 'medium')
         .addParameter('High', 'high');
@@ -67,12 +67,12 @@ class MessageRepo {
       label:
           'Warning Lorem ipsum dolor 😈 sit amet, consectetur adipiscing elit. Proin non lorem sit amet tellus semper vestibulum.',
       level: CopperframeMessageLevel.warning,
-      category: 'validation');
+      category: 'validation', flags: 'fix');
   static final otherWarning = CopperframeMessage(
       label:
           'Other warning Cras sit amet purus aliquam lacus finibus fringilla. Donec nulla odio, gravida quis eros ac, consectetur feugiat est.',
       level: CopperframeMessageLevel.warning,
-      category: 'validation');
+      category: 'validation', flags: 'spellcheck');
   static final error = CopperframeMessage(
       label:
           'Some error Cras sit amet purus aliquam lacus finibus fringilla. Donec nulla odio, gravida quis eros ac, consectetur feugiat est.',
@@ -130,6 +130,6 @@ class IconRepo {
   static BubblegumIconCollection iconCollection = BubblegumIconCollection(
       defaultContent: placeholder,
       icons: [info, warning, error, fix, help, spellcheck, privacy, validation],
-      maxIcons: 3,
+      maxIcons: 2,
       priorityKeys: [error.key, warning.key, info.key, fix.key]);
 }

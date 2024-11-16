@@ -19,22 +19,29 @@ class BubblegumMessageBadgeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeData = Theme.of(context);
     final int count =
         BubblegumMessageHelper.getMessageCountByLevel(messages, level);
     if (count == 0 && !showBadgesWhenEmpty) {
       return const SizedBox.shrink();
     }
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 4),
-      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-      decoration: BoxDecoration(
-        color: iconCollection.findIconByKeyOrDefault(level.name).icon.color,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Text('$count'),
+    return Badge.count(
+      count: count,
+      child: Icon(iconCollection.findIconByKeyOrDefault(level.name).icon.icon,
+          color: themeData.textTheme.titleMedium?.color ?? Colors.blue),
     );
   }
 }
+
+// Container(
+//       margin: const EdgeInsets.symmetric(horizontal: 4),
+//       padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+//       decoration: BoxDecoration(
+//         color: iconCollection.findIconByKeyOrDefault(level.name).icon.color,
+//         borderRadius: BorderRadius.circular(8),
+//       ),
+//       child: Text('$count'),
+//     );
 
 class BubblegumLevelBadgeWidget extends StatelessWidget {
   const BubblegumLevelBadgeWidget(
