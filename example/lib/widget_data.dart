@@ -67,12 +67,14 @@ class MessageRepo {
       label:
           'Warning Lorem ipsum dolor 😈 sit amet, consectetur adipiscing elit. Proin non lorem sit amet tellus semper vestibulum.',
       level: CopperframeMessageLevel.warning,
-      category: 'validation', flags: 'fix');
+      category: 'validation',
+      flags: 'fix');
   static final otherWarning = CopperframeMessage(
       label:
           'Other warning Cras sit amet purus aliquam lacus finibus fringilla. Donec nulla odio, gravida quis eros ac, consectetur feugiat est.',
       level: CopperframeMessageLevel.warning,
-      category: 'validation', flags: 'spellcheck');
+      category: 'validation',
+      flags: 'spellcheck');
   static final error = CopperframeMessage(
       label:
           'Some error Cras sit amet purus aliquam lacus finibus fringilla. Donec nulla odio, gravida quis eros ac, consectetur feugiat est.',
@@ -108,13 +110,24 @@ class IconRepo {
   static final BubblegumIconInfo placeholder = BubblegumIconInfo(
       key: 'placeholder', icon: Icon(Icons.info, color: Colors.grey.shade100));
   static final BubblegumIconInfo info = BubblegumIconInfo(
-      key: 'info', icon: Icon(Icons.info, color: Colors.blue.shade600, semanticLabel: 'info',));
+      key: 'info',
+      icon: Icon(
+        Icons.info,
+        color: Colors.blue.shade600,
+        semanticLabel: 'info',
+      ));
   static final BubblegumIconInfo warning = BubblegumIconInfo(
     key: 'warning',
-    icon: Icon(Icons.warning, color: Colors.orange.shade600, semanticLabel: 'warning'),
+    icon: Icon(Icons.warning,
+        color: Colors.orange.shade600, semanticLabel: 'warning'),
   );
   static final BubblegumIconInfo error = BubblegumIconInfo(
-      key: 'error', icon: Icon(Icons.error, color: Colors.red.shade600, semanticLabel: 'error',));
+      key: 'error',
+      icon: Icon(
+        Icons.error,
+        color: Colors.red.shade600,
+        semanticLabel: 'error',
+      ));
   static final BubblegumIconInfo fix = BubblegumIconInfo(
       key: 'fix', icon: Icon(Icons.info, color: Colors.purple.shade600));
   static final BubblegumIconInfo help = BubblegumIconInfo(

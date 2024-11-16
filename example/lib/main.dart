@@ -19,6 +19,7 @@ class _MyAppState extends State<MyApp> {
   final themeData = WidgetThemeData().themeData;
   final _infoSlot = InfoSlot(tags: ['main']);
   final loopData = IterationData();
+  var clickCounter = 0;
 
   void _incrementCounter() {
     setState(() {
@@ -78,8 +79,15 @@ class _MyAppState extends State<MyApp> {
               BubblegumMessageSlot(
                 slot: _infoSlot,
                 messages: loopData.slotMessages.current().value,
+                onMessageTap: (message) => setState(() {
+                  clickCounter++;
+                }),
                 iconCollection: IconRepo.iconCollection,
-                  groupMessagesByLevel: true,
+                groupMessagesByLevel: true,
+              ),
+              Text(
+                'Clicks $clickCounter',
+                style: Theme.of(context).textTheme.bodySmall,
               ),
             ],
           ),
