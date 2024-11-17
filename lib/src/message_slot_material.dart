@@ -4,33 +4,21 @@ import 'package:message_slot_bubblegum/src/message_bar_slot.dart';
 import 'package:slotboard_copperframe/slotboard_copperframe.dart';
 
 import 'fixed_size_message_widget.dart';
-import 'icon_collection.dart';
-import 'message_callback.dart';
+
+import 'message_slot_options.dart';
 import 'message_slot_theme.dart';
 
 class BubblegumMessageSlot extends StatelessWidget {
   final CopperframeSlotBase slot;
   final List<CopperframeMessage> messages;
-  final Map<String, int> messageLimits; // Configure message count per size.
-  final bool groupMessagesByLevel;
-  final BubblegumIconCollection iconCollection;
-  final OnMessageAction? onMessageTap;
-  final OnMessageAction? onMessageLongPress;
+  final BubblegumMessageSlotOptions options;
 
-  const BubblegumMessageSlot(
-      {super.key,
-      required this.slot,
-      required this.messages,
-      required this.iconCollection,
-      this.messageLimits = const {
-        'bar': 0,
-        'small': 2,
-        'medium': 5,
-        'large': 8,
-      },
-      this.groupMessagesByLevel = false,
-      this.onMessageTap,
-      this.onMessageLongPress});
+  const BubblegumMessageSlot({
+    super.key,
+    required this.slot,
+    required this.messages,
+    required this.options,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -65,40 +53,35 @@ class BubblegumMessageSlot extends StatelessWidget {
     switch (slot.size) {
       case 'bar':
         return BubblegumMessageBarSlot(
-            slot: slot, messages: messages, iconCollection: iconCollection);
+            slot: slot,
+            messages: messages,
+            iconCollection: options.iconCollection);
       case 'small':
         return BubblegumFixedSizeMessageWidget(
-            groupMessagesByLevel: groupMessagesByLevel,
-            messages: messages,
-            iconCollection: iconCollection,
-            messageLimits: messageLimits,
-            slot: slot,
-            maxMessages: 2,
-            onMessageTap: onMessageTap,
-            onMessageLongPress: onMessageLongPress);
+          messages: messages,
+          slot: slot,
+          maxMessages: 2,
+          options: options,
+        );
       case 'medium':
         return BubblegumFixedSizeMessageWidget(
-            groupMessagesByLevel: groupMessagesByLevel,
-            messages: messages,
-            iconCollection: iconCollection,
-            messageLimits: messageLimits,
-            slot: slot,
-            maxMessages: 5,
-            onMessageTap: onMessageTap,
-            onMessageLongPress: onMessageLongPress);
+          messages: messages,
+          slot: slot,
+          maxMessages: 5,
+          options: options,
+        );
       case 'large':
         return BubblegumFixedSizeMessageWidget(
-            groupMessagesByLevel: groupMessagesByLevel,
-            messages: messages,
-            iconCollection: iconCollection,
-            messageLimits: messageLimits,
-            slot: slot,
-            maxMessages: 8,
-            onMessageTap: onMessageTap,
-            onMessageLongPress: onMessageLongPress);
+          messages: messages,
+          slot: slot,
+          maxMessages: 8,
+          options: options,
+        );
       default:
         return BubblegumMessageBarSlot(
-            slot: slot, messages: messages, iconCollection: iconCollection);
+            slot: slot,
+            messages: messages,
+            iconCollection: options.iconCollection);
     }
   }
 }

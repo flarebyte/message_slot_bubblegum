@@ -68,7 +68,7 @@ class MessageRepo {
           'Warning Lorem ipsum dolor 😈 sit amet, consectetur adipiscing elit. Proin non lorem sit amet tellus semper vestibulum.',
       level: CopperframeMessageLevel.warning,
       category: 'validation',
-      flags: 'fix');
+      flags: 'fix onTap');
   static final otherWarning = CopperframeMessage(
       label:
           'Other warning Cras sit amet purus aliquam lacus finibus fringilla. Donec nulla odio, gravida quis eros ac, consectetur feugiat est.',

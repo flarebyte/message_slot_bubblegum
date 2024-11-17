@@ -79,11 +79,14 @@ class _MyAppState extends State<MyApp> {
               BubblegumMessageSlot(
                 slot: _infoSlot,
                 messages: loopData.slotMessages.current().value,
-                onMessageTap: (message) => setState(() {
-                  clickCounter++;
-                }),
-                iconCollection: IconRepo.iconCollection,
-                groupMessagesByLevel: true,
+                options: BubblegumMessageSlotOptsBuilder()
+                    .setIconCollection(IconRepo.iconCollection)
+                    .setGroupMessagesByLevel(true)
+                    .setOnTapHint('Fix the content')
+                    .setOnMessageTap((message) => setState(() {
+                          clickCounter++;
+                        }))
+                    .build(),
               ),
               Text(
                 'Clicks $clickCounter',
