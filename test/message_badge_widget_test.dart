@@ -4,39 +4,17 @@ import 'package:grand_copperframe/grand_copperframe.dart';
 import 'package:message_slot_bubblegum/message_slot_bubblegum.dart';
 import 'package:message_slot_bubblegum/src/message_badge_widget.dart';
 
+import 'widget_data.dart';
+
 void main() {
-  CopperframeMessage createCopperframeMessage(CopperframeMessageLevel level) =>
-      CopperframeMessage(level: level, label: level.name, category: 'any');
-  final BubblegumIconInfo placeholder = BubblegumIconInfo(
-      key: 'placeholder', icon: const Icon(Icons.info, color: Colors.grey));
-  final BubblegumIconInfo info = BubblegumIconInfo(
-      key: 'info',
-      icon: const Icon(
-        Icons.info,
-        color: Colors.blue,
-        semanticLabel: 'info',
-      ));
-  final BubblegumIconInfo warning = BubblegumIconInfo(
-    key: 'warning',
-    icon: const Icon(Icons.warning,
-        color: Colors.orange, semanticLabel: 'warning'),
-  );
-  final BubblegumIconInfo error = BubblegumIconInfo(
-      key: 'error',
-      icon: const Icon(Icons.error, color: Colors.red, semanticLabel: 'error'));
-  BubblegumIconCollection iconCollection = BubblegumIconCollection(
-      defaultContent: placeholder,
-      icons: [info, warning, error],
-      maxIcons: 2,
-      priorityKeys: [error.key, warning.key]);
   group('BubblegumLevelBadgeWidget Tests', () {
     testWidgets('Displays the correct number of messages in badge',
         (WidgetTester tester) async {
       // Arrange
       final messages = [
-        createCopperframeMessage(CopperframeMessageLevel.info),
-        createCopperframeMessage(CopperframeMessageLevel.warning),
-        createCopperframeMessage(CopperframeMessageLevel.error),
+        WidgetData.createCopperframeMessage(CopperframeMessageLevel.info),
+        WidgetData.createCopperframeMessage(CopperframeMessageLevel.warning),
+        WidgetData.createCopperframeMessage(CopperframeMessageLevel.error),
       ];
       final options = BubblegumMessageSlotOptsBuilder().build();
 
@@ -80,11 +58,11 @@ void main() {
         (WidgetTester tester) async {
       // Arrange
       final messages = [
-        createCopperframeMessage(CopperframeMessageLevel.info),
-        createCopperframeMessage(CopperframeMessageLevel.error),
+        WidgetData.createCopperframeMessage(CopperframeMessageLevel.info),
+        WidgetData.createCopperframeMessage(CopperframeMessageLevel.error),
       ];
       final options = BubblegumMessageSlotOptsBuilder()
-          .setIconCollection(iconCollection)
+          .setIconCollection(WidgetData.iconCollection)
           .build();
 
       // Act
@@ -106,7 +84,7 @@ void main() {
         (WidgetTester tester) async {
       // Arrange
       final messages = [
-        createCopperframeMessage(CopperframeMessageLevel.warning),
+        WidgetData.createCopperframeMessage(CopperframeMessageLevel.warning),
       ];
       final options = BubblegumMessageSlotOptsBuilder().build();
 
@@ -129,7 +107,7 @@ void main() {
     testWidgets('Follows a11y guidelines', (tester) async {
       final SemanticsHandle handle = tester.ensureSemantics();
       final messages = [
-        createCopperframeMessage(CopperframeMessageLevel.warning),
+        WidgetData.createCopperframeMessage(CopperframeMessageLevel.warning),
       ];
       final options = BubblegumMessageSlotOptsBuilder().build();
 
