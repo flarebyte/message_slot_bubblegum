@@ -42,16 +42,21 @@ class BubblegumFixedSizeMessageWidget extends StatelessWidget {
             slotMaxMessages: messageLimits[slot.size]);
     final isAboveLimit = displayedMessages.length > limitedMessages.length;
     final messageTiles = limitedMessages
-        .map((msg) => ListTile(
-            title: Text(msg.label, textAlign: TextAlign.justify),
-            onTap: (onMessageTap != null) ? () => onMessageTap!(msg) : null,
-            onLongPress:
-                (onMessageTap != null) ? () => onMessageLongPress!(msg) : null,
-            leading: Column(
-                children: iconCollection
-                    .findIcons(msg)
-                    .map((ico) => ico.icon)
-                    .toList())))
+        .map((msg) => Semantics(
+            button: onMessageTap != null,
+            onTapHint: '',
+            onLongPressHint: '',
+            child: ListTile(
+                title: Text(msg.label, textAlign: TextAlign.justify),
+                onTap: (onMessageTap != null) ? () => onMessageTap!(msg) : null,
+                onLongPress: (onMessageTap != null)
+                    ? () => onMessageLongPress!(msg)
+                    : null,
+                leading: Column(
+                    children: iconCollection
+                        .findIcons(msg)
+                        .map((ico) => ico.icon)
+                        .toList()))))
         .toList();
     final header = BubblegumMessageBarSlot(
         slot: slot, messages: messages, iconCollection: iconCollection);
