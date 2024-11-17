@@ -89,6 +89,7 @@ class MessageRepo {
 
 class WidgetThemeData {
   late CircularParameterList<ThemeData> themeData;
+  late CircularParameterList<bool> showSemanticsDebuggerData;
   WidgetThemeData() {
     themeData = CircularParameterList(
         label: 'Purple',
@@ -103,6 +104,9 @@ class WidgetThemeData {
           useMaterial3: true,
         ));
     themeData.addParameter('Dark', ThemeData.dark(useMaterial3: true));
+    showSemanticsDebuggerData =
+        CircularParameterList(label: 'Classic', value: false)
+            .addParameter('Semantic', true);
   }
 }
 

@@ -18,6 +18,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final themeData = WidgetThemeData().themeData;
+  final showSemanticsDebuggerData = WidgetThemeData().showSemanticsDebuggerData;
   final localeData = WidgetLocaleData().localeData;
   final _infoSlot = InfoSlot(tags: ['main']);
   final loopData = IterationData();
@@ -39,7 +40,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'BubblegumMessageSlot',
       theme: themeData.current().value,
-      showSemanticsDebugger: false,
+      showSemanticsDebugger: showSemanticsDebuggerData.current().value,
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -56,6 +57,15 @@ class _MyAppState extends State<MyApp> {
           title: const Text('BubblegumMessageSlot',
               style: TextStyle(color: Colors.black)),
           actions: [
+            IconButton(
+              icon: const Icon(Icons.accessibility, color: Colors.black),
+              onPressed: () {
+                setState(() {
+                  showSemanticsDebuggerData.next();
+                });
+              },
+              tooltip: 'Toggle Semantic',
+            ),
             IconButton(
               icon: const Icon(Icons.flag, color: Colors.black),
               onPressed: () {
