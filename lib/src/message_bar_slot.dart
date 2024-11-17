@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:grand_copperframe/grand_copperframe.dart';
-import 'package:message_slot_bubblegum/src/icon_collection.dart';
 import 'package:slotboard_copperframe/slotboard_copperframe.dart';
 
+import '../message_slot_bubblegum.dart';
 import 'message_badge_widget.dart';
 
 class BubblegumMessageBarSlot extends StatelessWidget {
@@ -10,12 +10,12 @@ class BubblegumMessageBarSlot extends StatelessWidget {
     super.key,
     required this.slot,
     required this.messages,
-    required this.iconCollection,
+    required this.options,
   });
 
   final CopperframeSlotBase slot;
   final List<CopperframeMessage> messages;
-  final BubblegumIconCollection iconCollection;
+  final BubblegumMessageSlotOptions options;
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +29,7 @@ class BubblegumMessageBarSlot extends StatelessWidget {
         const Spacer(),
         const SizedBox(width: 8),
         if (messages.isNotEmpty)
-          BubblegumLevelBadgeWidget(
-              messages: messages, iconCollection: iconCollection),
+          BubblegumLevelBadgeWidget(messages: messages, options: options),
       ],
     );
   }

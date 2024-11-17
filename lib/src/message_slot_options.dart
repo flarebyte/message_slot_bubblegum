@@ -13,17 +13,21 @@ class BubblegumMessageSlotOptions {
   final OnMessageAction? onMessageLongPress;
   final String? onTapHint;
   final String? onLongPressHint;
-  final String? messageLabel;
+  final String errorMessageLabel;
+  final String warningMessageLabel;
+  final String otherMessageLabel;
 
   const BubblegumMessageSlotOptions({
     required this.messageLimits,
     required this.groupMessagesByLevel,
     required this.iconCollection,
+    required this.errorMessageLabel,
+    required this.warningMessageLabel,
+    required this.otherMessageLabel,
     this.onMessageTap,
     this.onMessageLongPress,
     this.onTapHint,
     this.onLongPressHint,
-    this.messageLabel,
   });
 
   bool hasTap(CopperframeMessage message) =>
@@ -41,6 +45,17 @@ class BubblegumMessageSlotOptions {
 
   String? onMaybeLongPressHint(CopperframeMessage message) =>
       hasLongPress(message) ? onLongPressHint : null;
+
+  String messageLabelForLevel(CopperframeMessageLevel level) {
+    switch (level) {
+      case CopperframeMessageLevel.error:
+        return errorMessageLabel;
+      case CopperframeMessageLevel.warning:
+        return warningMessageLabel;
+      default:
+        return otherMessageLabel;
+    }
+  }
 }
 
 final BubblegumIconInfo _placeholder = BubblegumIconInfo(
@@ -65,7 +80,9 @@ class BubblegumMessageSlotOptsBuilder {
   OnMessageAction? _onMessageLongPress;
   String? _onTapHint;
   String? _onLongPressHint;
-  String? _messageLabel;
+  String? _errorMessageLabel;
+  String? _warningMessageLabel;
+  String? _otherMessageLabel;
 
   /// Sets the message limits for different levels.
   ///
@@ -127,12 +144,30 @@ class BubblegumMessageSlotOptsBuilder {
     return this;
   }
 
-  /// Sets a label for the message slot.
+  /// Sets a label when there at least one error message.
   ///
-  /// [label] is a descriptive label for the message slot, typically for
+  /// [label] is a descriptive label for the message when there at least one error message, typically for
   /// accessibility or UI purposes.
-  BubblegumMessageSlotOptsBuilder setMessageLabel(String? label) {
-    _messageLabel = label;
+  BubblegumMessageSlotOptsBuilder setErrorMessageLabel(String label) {
+    _errorMessageLabel = label;
+    return this;
+  }
+
+  /// Sets a label when there at least one warning message.
+  ///
+  /// [label] is a descriptive label for the message when there at least one warning message, typically for
+  /// accessibility or UI purposes.
+  BubblegumMessageSlotOptsBuilder setWarningMessageLabel(String label) {
+    _warningMessageLabel = label;
+    return this;
+  }
+
+  /// Sets a label when there is some messages.
+  ///
+  /// [label] is a descriptive label for the message when there is some messages, typically for
+  /// accessibility or UI purposes.
+  BubblegumMessageSlotOptsBuilder setOtherMessageLabel(String label) {
+    _otherMessageLabel = label;
     return this;
   }
 
@@ -147,7 +182,10 @@ class BubblegumMessageSlotOptsBuilder {
       onMessageLongPress: _onMessageLongPress,
       onTapHint: _onTapHint,
       onLongPressHint: _onLongPressHint,
-      messageLabel: _messageLabel,
+      errorMessageLabel: _errorMessageLabel ?? 'At least one error message',
+      warningMessageLabel:
+          _warningMessageLabel ?? 'At least one warning message',
+      otherMessageLabel: _otherMessageLabel ?? 'At least one message',
     );
   }
 }

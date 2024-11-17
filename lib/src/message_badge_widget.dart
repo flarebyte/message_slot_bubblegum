@@ -6,10 +6,10 @@ import 'message_helper.dart';
 
 class BubblegumLevelBadgeWidget extends StatelessWidget {
   const BubblegumLevelBadgeWidget(
-      {super.key, required this.messages, required this.iconCollection});
+      {super.key, required this.messages, required this.options});
 
   final List<CopperframeMessage> messages;
-  final BubblegumIconCollection iconCollection;
+  final BubblegumMessageSlotOptions options;
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +20,8 @@ class BubblegumLevelBadgeWidget extends StatelessWidget {
     return Badge.count(
       count: messages.length,
       child: Icon(Icons.notifications,
-          semanticLabel: '${messages.length} notifications',
-          color: iconCollection
+          semanticLabel: options.messageLabelForLevel(highestLevel),
+          color: options.iconCollection
               .findIconByKeyOrDefault(highestLevel.name)
               .icon
               .color),

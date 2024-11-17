@@ -53,9 +53,10 @@ class BubblegumMessageSlot extends StatelessWidget {
     switch (slot.size) {
       case 'bar':
         return BubblegumMessageBarSlot(
-            slot: slot,
-            messages: messages,
-            iconCollection: options.iconCollection);
+          slot: slot,
+          messages: messages,
+          options: options,
+        );
       case 'small':
         return BubblegumFixedSizeMessageWidget(
           messages: messages,
@@ -79,9 +80,10 @@ class BubblegumMessageSlot extends StatelessWidget {
         );
       default:
         return BubblegumMessageBarSlot(
-            slot: slot,
-            messages: messages,
-            iconCollection: options.iconCollection);
+          slot: slot,
+          messages: messages,
+          options: options,
+        );
     }
   }
 }
