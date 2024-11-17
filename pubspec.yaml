@@ -3,6 +3,8 @@ description: "Flutter widget to help you pop your messages"
 version: 0.3.0
 homepage: https://github.com/flarebyte/message_slot_bubblegum
 
+publish_to: none
+
 environment:
   sdk: ^3.4.4
   flutter: "3.24.0"

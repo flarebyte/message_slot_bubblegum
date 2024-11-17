@@ -41,10 +41,10 @@ class _MyAppState extends State<MyApp> {
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: const Text('BubblegumMessageSlot'),
+          title: const Text('BubblegumMessageSlot', style: TextStyle(color: Colors.black)),
           actions: [
             IconButton(
-              icon: const Icon(Icons.refresh),
+              icon: const Icon(Icons.refresh, color: Colors.black),
               onPressed: () {
                 setState(() {
                   loopData.mainCircularIterator.reset();
@@ -53,7 +53,7 @@ class _MyAppState extends State<MyApp> {
               tooltip: 'Reset Content',
             ),
             IconButton(
-              icon: const Icon(Icons.brightness_6),
+              icon: const Icon(Icons.brightness_6, color: Colors.black),
               onPressed: () {
                 themeData.next();
               },
