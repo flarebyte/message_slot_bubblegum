@@ -106,6 +106,15 @@ class WidgetThemeData {
   }
 }
 
+class WidgetLocaleData {
+  late CircularParameterList<Locale> localeData;
+  WidgetLocaleData() {
+    localeData =
+        CircularParameterList(label: 'English', value: const Locale('en'))
+            .addParameter('Arabic', const Locale('ar'));
+  }
+}
+
 class IconRepo {
   static final BubblegumIconInfo placeholder = BubblegumIconInfo(
       key: 'placeholder', icon: Icon(Icons.info, color: Colors.grey.shade100));

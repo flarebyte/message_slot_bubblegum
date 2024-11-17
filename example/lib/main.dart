@@ -1,5 +1,6 @@
 import 'package:example/widget_data.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:message_slot_bubblegum/message_slot_bubblegum.dart';
 
 import 'circular_parameter_widget.dart';
@@ -17,6 +18,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final themeData = WidgetThemeData().themeData;
+  final localeData = WidgetLocaleData().localeData;
   final _infoSlot = InfoSlot(tags: ['main']);
   final loopData = IterationData();
   var clickCounter = 0;
@@ -38,11 +40,40 @@ class _MyAppState extends State<MyApp> {
       title: 'BubblegumMessageSlot',
       theme: themeData.current().value,
       showSemanticsDebugger: false,
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en'), // English
+        Locale('ar'), // Arabic
+      ],
+      locale: localeData.current().value,
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: const Text('BubblegumMessageSlot', style: TextStyle(color: Colors.black)),
+          title: const Text('BubblegumMessageSlot',
+              style: TextStyle(color: Colors.black)),
           actions: [
+            IconButton(
+              icon: const Icon(Icons.flag, color: Colors.black),
+              onPressed: () {
+                setState(() {
+                  localeData.next();
+                });
+              },
+              tooltip: 'Toggle Locale',
+            ),
+            IconButton(
+              icon: const Icon(Icons.brightness_6, color: Colors.black),
+              onPressed: () {
+                setState(() {
+                  themeData.next();
+                });
+              },
+              tooltip: 'Toggle Theme',
+            ),
             IconButton(
               icon: const Icon(Icons.refresh, color: Colors.black),
               onPressed: () {
@@ -51,13 +82,6 @@ class _MyAppState extends State<MyApp> {
                 });
               },
               tooltip: 'Reset Content',
-            ),
-            IconButton(
-              icon: const Icon(Icons.brightness_6, color: Colors.black),
-              onPressed: () {
-                themeData.next();
-              },
-              tooltip: 'Toggle Theme',
             ),
           ],
         ),
