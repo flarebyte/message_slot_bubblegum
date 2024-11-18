@@ -33,11 +33,11 @@ class WidgetData {
       icons: [info, warning, error],
       maxIcons: 2,
       priorityKeys: [error.key, warning.key]);
-  static InfoSlot createSlot() {
+  static InfoSlot createSlot({String? prominence, String? size}) {
     final mockSlot = InfoSlot(tags: ['main']);
     mockSlot.setValues(
-        size: 'medium',
-        prominence: 'low',
+        size: size ?? 'medium',
+        prominence: prominence ?? 'low',
         title: 'Some title',
         description: 'This is a test slot description.');
     return mockSlot;
