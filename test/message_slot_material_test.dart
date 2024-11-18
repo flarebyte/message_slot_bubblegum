@@ -4,7 +4,6 @@ import 'package:grand_copperframe/grand_copperframe.dart';
 import 'package:message_slot_bubblegum/message_slot_bubblegum.dart';
 import 'package:message_slot_bubblegum/src/fixed_size_message_widget.dart';
 import 'package:message_slot_bubblegum/src/message_bar_slot.dart';
-import 'package:message_slot_bubblegum/src/message_slot_theme.dart';
 
 import 'widget_data.dart';
 
