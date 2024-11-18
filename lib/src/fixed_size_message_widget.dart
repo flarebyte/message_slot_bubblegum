@@ -7,7 +7,14 @@ import 'message_helper.dart';
 import 'message_slot_options.dart';
 import 'message_slot_theme.dart';
 
+/// A stateless widget representing a fixed size message widget in the Bubblegum UI framework.
+///
+/// This widget displays a list of messages, grouped and limited based on the given options.
+/// It includes a header, message tiles, and an indicator if more messages are available.
 class BubblegumFixedSizeMessageWidget extends StatelessWidget {
+  /// Creates an instance of [BubblegumFixedSizeMessageWidget].
+  ///
+  /// The [messages], [slot], [maxMessages], and [options] parameters are required.
   const BubblegumFixedSizeMessageWidget({
     super.key,
     required this.messages,
@@ -16,9 +23,24 @@ class BubblegumFixedSizeMessageWidget extends StatelessWidget {
     required this.options,
   });
 
+  /// The list of messages to be displayed.
+  ///
+  /// The messages can be grouped or limited based on the [options] provided.
   final List<CopperframeMessage> messages;
+
+  /// The slot associated with this message widget.
+  ///
+  /// This provides information about the slot, such as its size, that can affect the display.
   final CopperframeSlotBase slot;
+
+  /// The maximum number of messages to display.
+  ///
+  /// This value is used to limit the number of messages shown in the widget.
   final int maxMessages;
+
+  /// Options to customize the appearance and behavior of the message widget.
+  ///
+  /// These options determine how messages are grouped, whether they can be tapped, and more.
   final BubblegumMessageSlotOptions options;
 
   @override
