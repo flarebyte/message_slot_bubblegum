@@ -3,6 +3,8 @@ description: "Flutter widget to help you pop your messages"
 version: 0.3.0
 homepage: https://github.com/flarebyte/message_slot_bubblegum
 
+publish_to: none
+
 environment:
   sdk: ^3.4.4
   flutter: "3.24.0"
@@ -13,6 +15,10 @@ dependencies:
   grand_copperframe:
     git:
       url: https://github.com/flarebyte/grand_copperframe.git
+      ref: v0.3.0
+  slotboard_copperframe:
+    git:
+      url: https://github.com/flarebyte/slotboard_copperframe.git
       ref: v0.3.0
 
 dev_dependencies:

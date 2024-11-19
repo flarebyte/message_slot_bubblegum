@@ -4,20 +4,44 @@
 
 > Flutter widget to help you pop your messages
 
-Flutter widget to help you pop your messages
+A Flutter component leveraging Material3 to dynamically render different
+layouts based on message content and slot configurations. It helps developers
+easily display messages of varying prominence and size, including
+customizable badges and message grouping.
 
 ![Hero image for message\_slot\_bubblegum](doc/message_slot_bubblegum.jpeg)
 
 Highlights:
 
--   TODO
+-   Integrates `CopperframeMessage` and `CopperframeSlotBase` models to
+    support dynamic layout rendering.
+-   Offers four different size configurations (`bar`, `small`, `medium`,
+    `large`) with adjustable message counts and layout rules.
+-   Customizable visual prominence (`low`, `medium`, `high`) to ensure
+    appropriate emphasis for different use cases.
+-   Supports badge display with configurable visibility based on message
+    availability.
+-   Handles edge cases such as no messages gracefully, ensuring a smooth
+    user experience.
 
 A few examples:
 
-Create a message holder:
+BubblegumMessageSlot Example:
 
 ```dart
-final CopperframeMessagesHolder holder = CopperframeMessagesHolder();
+BubblegumMessageSlot(
+  slot: _infoSlot,
+  messages: loopData.slotMessages.current().value,
+  options: BubblegumMessageSlotOptsBuilder()
+    .setIconCollection(IconRepo.iconCollection)
+    .setGroupMessagesByLevel(true)
+    .setOnTapHint('Fix the content')
+    .setOnMessageTap((message) => setState(() {
+      clickCounter++;
+    }))
+    .build(),
+)
+
 ```
 
 ## Documentation and links
@@ -41,4 +65,5 @@ final CopperframeMessagesHolder holder = CopperframeMessagesHolder();
 
 ## Related
 
--   [form\_validator](https://pub.dev/packages/form_validator)
+-   [Material Design 3](https://m3.material.io/)
+-   [Flutter Documentation](https://docs.flutter.dev/)

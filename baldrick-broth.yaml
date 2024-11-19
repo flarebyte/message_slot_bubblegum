@@ -1,26 +1,49 @@
 model:
   project:
     title: Flutter widget to help you pop your messages
-    description: Flutter widget to help you pop your messages
+    description: A Flutter component leveraging Material3 to dynamically render different layouts based on message content and slot configurations. It helps developers easily display messages of varying prominence and size, including customizable badges and message grouping.
     version: 0.3.0
     keywords:
-      - message
+      - Flutter
+      - Material3
+      - dynamic layout
+      - message display
+      - customizable widget
+      - badges
+      - prominence control
+      - Copperframe integration
   readme:
     highlights:
-      - TODO
+      - Integrates `CopperframeMessage` and `CopperframeSlotBase` models to support dynamic layout rendering.
+      - Offers four different size configurations (`bar`, `small`, `medium`, `large`) with adjustable message counts and layout rules.
+      - Customizable visual prominence (`low`, `medium`, `high`) to ensure appropriate emphasis for different use cases.
+      - Supports badge display with configurable visibility based on message availability.
+      - Handles edge cases such as no messages gracefully, ensuring a smooth user experience.
+    related:
+      - "[Material Design 3](https://m3.material.io/)"
+      - "[Flutter Documentation](https://docs.flutter.dev/)"
     links:
       - "[Dart dependencies](DEPENDENCIES.md)"
       - "[Usage](USAGE.md)"
       - "[Example](example/example.dart)"
-    related:
-      - "[form_validator](https://pub.dev/packages/form_validator)"
     tags:
       - image-hero
     cheatsheetFormat: dart
     cheatsheet:
-      - title: Create a message holder
-        example: "final CopperframeMessagesHolder holder = CopperframeMessagesHolder();"
-
+      - title: BubblegumMessageSlot Example
+        example: |
+          BubblegumMessageSlot(
+            slot: _infoSlot,
+            messages: loopData.slotMessages.current().value,
+            options: BubblegumMessageSlotOptsBuilder()
+              .setIconCollection(IconRepo.iconCollection)
+              .setGroupMessagesByLevel(true)
+              .setOnTapHint('Fix the content')
+              .setOnMessageTap((message) => setState(() {
+                clickCounter++;
+              }))
+              .build(),
+          )
   github:
     account: flarebyte
     name: message_slot_bubblegum
