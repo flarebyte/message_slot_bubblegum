@@ -30,8 +30,20 @@ model:
       - image-hero
     cheatsheetFormat: dart
     cheatsheet:
-      - title: Create a message holder
-        example: "final CopperframeMessagesHolder holder = CopperframeMessagesHolder();"
+      - title: BubblegumMessageSlot Example
+        example: |
+          BubblegumMessageSlot(
+            slot: _infoSlot,
+            messages: loopData.slotMessages.current().value,
+            options: BubblegumMessageSlotOptsBuilder()
+              .setIconCollection(IconRepo.iconCollection)
+              .setGroupMessagesByLevel(true)
+              .setOnTapHint('Fix the content')
+              .setOnMessageTap((message) => setState(() {
+                clickCounter++;
+              }))
+              .build(),
+          )
   github:
     account: flarebyte
     name: message_slot_bubblegum
